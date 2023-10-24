@@ -48,7 +48,7 @@ public final class Main {
      * @param args (String[]) - command line arguments
      * @implNote PLEASE UNCOMMENT EACH ASSERTION TO CHECK IF YOUR IMPLEMENTATION IS WORKING
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) {/*
         // ========== Test Bit ==========
         assert testXthBit();
         assert testGetLSB();
@@ -81,12 +81,14 @@ public final class Main {
         assert testEmbedBWImage();
         assert testEmbedText();
         assert testImageSteganographyWithImages("the-starry-night");
-        Helper.dialog("Tests ", "ImageSteganography passed");
+        Helper.dialog("Tests ", "ImageSteganography passed");*/
         //hideMyMessage();
         //readMyMessage();
 
         //hideMyImage();
         //readMyImage();
+
+        unlockChallenge();
     }
 
     // ============================================================================================
@@ -362,8 +364,20 @@ public final class Main {
     }
 
     private static void unlockChallenge() {
+        /*
+        var hint2 = Helper.read("challenge" + File.separator + "hint2.txt");
+        System.out.println(Text.toString(Decrypt.xor(hint2, Text.toBytes("a")[0])));
+        */
         var image = Helper.readImage("challenge" + File.separator + "image.png");
-        System.out.println(Text.toString(TextSteganography.revealText(image)));;
+
+        var cover = Helper.readImage("the-starry-night" + File.separator + "cover.png");
+        var newImage = TextSteganography.embedText(cover, Text.toBytes("coucou la populatione ;) ça va ?"));
+        Helper.writeImage("the-starry-night" + File.separator + "editedahah.png", newImage);
+
+        var newContent = Helper.readImage("the-starry-night" + File.separator + "editedahah.png");
+        System.out.println(Text.toString(TextSteganography.revealText(newContent)));
+
+        System.out.println(Text.toString(Decrypt.cbc(TextSteganography.revealText(image), Text.toBytes("adele"))));
     }
 
     private static void hideMyMessage() {
