@@ -61,16 +61,23 @@ public final class ImageSteganography {
      * @return ARGB image with the image embedded on the cover
      */
     public static int[][] embedBW(int[][] cover, boolean[][] load){
+        System.out.println("cover is " + cover.length + "x" + cover[0].length);
+        System.out.println("load is " + load.length + "x" + load[0].length);
+
         final int[][] newCover = new int[cover.length][];
+        for (int i = 0; i < cover.length; i++) {
+            newCover[i] = new int[cover[i].length];
+        }
+
         for (int coordsH = 0; coordsH < load.length; coordsH++) {
             for (int coordsL = 0; coordsL < load[coordsH].length; coordsL++) {
                 boolean pixelLoad = load[coordsH][coordsL];
                 int pixelCover = cover[coordsH][coordsL];
                 int embeddedPixel = Bit.embedInLSB(pixelCover, pixelLoad);
-                if (newCover[coordsH]== null) newCover[coordsH] = new int[cover[coordsH].length];
                 newCover[coordsH][coordsL] = embeddedPixel;
             }
         }
+        System.out.println("final is " + newCover.length + "x" + newCover[0].length);
         return newCover;
     }
 
