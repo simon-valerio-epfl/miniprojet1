@@ -65,7 +65,7 @@ public final class Main {
         assert testImageToGray();
         assert testGrayImageToBinary();
         assert testImageFromGray();
-        //assert testImageFromBinary();
+        assert testImageFromBinary();
         Helper.dialog("Tests ", "Image manipulation passed");
         //assert testWithRealImage("image-formats");
         //assert testBinaryWithRealImage("image-formats");
