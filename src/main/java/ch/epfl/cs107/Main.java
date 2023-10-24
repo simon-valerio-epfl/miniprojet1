@@ -83,7 +83,11 @@ public final class Main {
         assert testEmbedText();
         assert testImageSteganographyWithImages("the-starry-night");
         Helper.dialog("Tests ", "ImageSteganography passed");*/
-        unlockChallenge();
+        hideMyMessage();
+        readMyMessage();
+
+        //hideMyImage();
+        //readMyImage();
     }
 
     // ============================================================================================
@@ -363,4 +367,29 @@ public final class Main {
         System.out.println(Text.toString(TextSteganography.revealText(image)));;
     }
 
+    private static void hideMyMessage() {
+        var imageDeBase = Helper.readImage("the-starry-night" + File.separator + "cover.png");
+        // let's hide "coucou" in there
+        var newImage = TextSteganography.embedText(imageDeBase, Text.toBytes("coucou les gens !"));
+        Helper.writeImage("the-starry-night" + File.separator + "cover_edited.png", newImage);
+    }
+
+    private static void readMyMessage() {
+        var newImage = Helper.readImage("the-starry-night" + File.separator + "cover_edited.png");
+        Text.toString(TextSteganography.revealText(newImage));
+        //System.out.println(Text.toString(TextSteganography.revealText(newImage)));
+    }
+
+    private static void hideMyImage() {
+        var imageDeBase = Helper.readImage("the-starry-night" + File.separator + "cover.png");
+        var imageACacher = Helper.readImage("the-starry-night" + File.separator + "image.png");
+        var newImage = ImageSteganography.embedARGB(imageDeBase, imageACacher, IMAGE_THRESHOLD);
+        Helper.writeImage("the-starry-night" + File.separator + "image_cachee.png", newImage);
+    }
+
+    private static void readMyImage() {
+        var newImage = Helper.readImage("the-starry-night" + File.separator + "image_cachee.png");
+        var decryptedImage = Image.fromBinary(ImageSteganography.revealBW(newImage));
+        Helper.writeImage("the-starry-night" + File.separator + "image_revelee.png", decryptedImage);
+    }
 }
