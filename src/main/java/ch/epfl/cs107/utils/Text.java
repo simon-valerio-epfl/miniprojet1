@@ -46,7 +46,16 @@ public final class Text {
      * @return <b>UTF-8</b> representation of the string in the <b>bit array</b> format
      */
     public static boolean[] toBitArray(String str){
-        return Helper.fail("NOT IMPLEMENTED");
+        byte[] bytesInString = str.getBytes(StandardCharsets.UTF_8);
+        boolean[] res = new boolean[bytesInString.length * 8];
+
+        for (int i = 0; i < bytesInString.length; i++) {
+            boolean[] bytesAsBits = Bit.toBitArray(bytesInString[i]);
+            for (int j = 0; j < 8; j++) {
+                res[ i * 8 + j ] = bytesAsBits[j];
+            }
+        }
+        return res;
     }
 
     /**
