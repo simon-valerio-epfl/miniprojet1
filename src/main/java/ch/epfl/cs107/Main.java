@@ -50,16 +50,16 @@ public final class Main {
      */
     public static void main(String[] args) {
         // ========== Test Bit ==========
-        //assert testXthBit();
-        //assert testGetLSB();
-        //assert testEmbedInXthBit();
-        //assert testEmbedInLSB();
-        //assert testByteConversion();
+        assert testXthBit();
+        assert testGetLSB();
+        assert testEmbedInXthBit();
+        assert testEmbedInLSB();
+        assert testByteConversion();
         // ========== Test Text ==========
-        //assert testToBitArray();
-        Helper.dialog("Tests", "Bit and Text manipulation passed");
+        assert testToBitArray();
+        //Helper.dialog("Tests", "Bit and Text manipulation passed");
         // ========== Test Image ==========
-        //assert testConversionARGBInt();
+        assert testConversionARGBInt();
         //assert testPixelToGray();
         //assert testGrayToBinary();
         //assert testImageToGray();
@@ -161,6 +161,8 @@ public final class Main {
         byte redByte = Image.red(color);
         byte greenByte = Image.green(color);
         byte blueByte = Image.blue(color);
+
+        System.out.println(alphaByte);
         /*
         //uncomment to debug
         System.out.println(color); // -1044651
