@@ -36,7 +36,12 @@ public final class Encrypt {
      * @return an encoded byte array
      */
     public static byte[] caesar(byte[] plainText, byte key) {
-        return Helper.fail("NOT IMPLEMENTED");
+        final byte[] res = new byte[plainText.length];
+        for (int i = 0; i < plainText.length; i++) {
+            byte newCharByte = (byte) (plainText[i] + key);
+            res[i] = newCharByte;
+        }
+        return res;
     }
 
     // ============================================================================================
