@@ -58,8 +58,9 @@ public final class Bit {
      * @return <code>true</code> if the bit is '1' and <code>false</code> otherwise
      */
     public static boolean getXthBit(int value, int pos) {
-        // questa è una modifica
-        return Helper.fail("NOT IMPLEMENTED");
+        String binaryString = Integer.toBinaryString(value);
+        int newPos = Integer.SIZE - 1 - pos;
+        return binaryString.charAt(newPos) == '1';
     }
 
     /**
