@@ -2,6 +2,8 @@ package ch.epfl.cs107.crypto;
 
 import ch.epfl.cs107.Helper;
 
+import java.util.Arrays;
+
 import static ch.epfl.cs107.utils.Text.*;
 import static ch.epfl.cs107.utils.Image.*;
 import static ch.epfl.cs107.utils.Bit.*;
@@ -74,7 +76,20 @@ public final class Decrypt {
      * @return decoded message
      */
     public static byte[] cbc(byte[] cipher, byte[] iv) {
-        return Helper.fail("NOT IMPLEMENTED");
+        final int blockSize = iv.length;
+        final int completeIterationCount = cipher.length / blockSize;
+        final byte[] plainText = new byte[cipher.length];
+
+        byte[] lastCipherBlock = iv;
+
+        for (int i = 0; i < completeIterationCount; i++) {
+            byte[] currentCipherBlock = Arrays.copyOfRange(cipher, i * blockSize, (i + 1) * blockSize);
+            byte[] decryptedBlock = oneTimePad(currentCipherBlock, lastCipherBlock);
+            System.arraycopy(decryptedBlock, 0, plainText, i * blockSize, decryptedBlock.length);
+            lastCipherBlock = currentCipherBlock;
+        }
+
+        return plainText;
     }
 
     // ============================================================================================

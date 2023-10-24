@@ -2,6 +2,8 @@ package ch.epfl.cs107.crypto;
 
 import ch.epfl.cs107.Helper;
 
+import java.util.Arrays;
+
 import static ch.epfl.cs107.utils.Text.*;
 import static ch.epfl.cs107.utils.Image.*;
 import static ch.epfl.cs107.utils.Bit.*;
@@ -77,7 +79,34 @@ public final class Encrypt {
      * @return an encoded byte array
      */
     public static byte[] cbc(byte[] plainText, byte[] iv) {
-        return Helper.fail("NOT IMPLEMENTED");
+        final int blockSize = iv.length;
+
+        final int completeIterationCount = plainText.length / blockSize;
+        final byte[] cipherText = new byte[plainText.length];
+
+        byte[] lastPad = iv;
+
+        for (int i = 0; i < completeIterationCount; i++) {
+            // we take the corresponding text
+            byte[] textPart = Arrays.copyOfRange(plainText, i * blockSize, (i + 1) * blockSize);
+            // we encrypt it and save the result as the next pad
+            lastPad = oneTimePad(textPart, lastPad);
+            // then we add the ciphered text to the final res
+            for (int j = 0; j < lastPad.length; j++) {
+                cipherText[i*blockSize + j] = lastPad[j];
+            }
+        }
+
+        if (plainText.length % blockSize != 0) {
+            int startIndex = completeIterationCount * blockSize;
+            byte[] lastTextPart = Arrays.copyOfRange(plainText, startIndex, plainText.length);
+            lastPad = oneTimePad(lastTextPart, lastPad);
+            for (int i = 0; i < lastPad.length; i++) {
+                cipherText[completeIterationCount * blockSize + i] = lastPad[i];
+            }
+        }
+
+        return cipherText;
     }
 
     // ============================================================================================
