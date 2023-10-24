@@ -1,6 +1,8 @@
 package ch.epfl.cs107.stegano;
 
 import ch.epfl.cs107.Helper;
+import ch.epfl.cs107.utils.Bit;
+import ch.epfl.cs107.utils.Image;
 
 import static ch.epfl.cs107.utils.Text.*;
 import static ch.epfl.cs107.utils.Image.*;
@@ -30,23 +32,28 @@ public final class ImageSteganography {
     /**
      * Embed an ARGB image on another ARGB image (the cover)
      * @param cover Cover image
-     * @param image Embedded image
+     * @param argbImage Embedded image
      * @param threshold threshold to use for binary conversion
      * @return ARGB image with the image embedded on the cover
      */
     public static int[][] embedARGB(int[][] cover, int[][] argbImage, int threshold){
-        return Helper.fail("NOT IMPLEMENTED");
+        assert argbImage.length < cover.length;
+        int[][] grayImage = toGray(argbImage);
+        return embedGray(cover, grayImage, threshold);
     }
 
     /**
      * Embed a Gray scaled image on another ARGB image (the cover)
      * @param cover Cover image
-     * @param image Embedded image
+     * @param grayImage Embedded image
      * @param threshold threshold to use for binary conversion
      * @return ARGB image with the image embedded on the cover
      */
     public static int[][] embedGray(int[][] cover, int[][] grayImage, int threshold){
-        return Helper.fail("NOT IMPLEMENTED");
+        assert grayImage.length < cover.length;
+        boolean[][] binaryImage = toBinary(grayImage, threshold);
+        final int[][] newCover = new int[cover.length][];
+        return embedBW(cover, binaryImage);
     }
 
     /**
@@ -56,7 +63,17 @@ public final class ImageSteganography {
      * @return ARGB image with the image embedded on the cover
      */
     public static int[][] embedBW(int[][] cover, boolean[][] load){
-        return Helper.fail("NOT IMPLEMENTED");
+        final int[][] newCover = new int[cover.length][];
+        for (int coordsH = 0; coordsH < load.length; coordsH++) {
+            for (int coordsL = 0; coordsL < load[coordsH].length; coordsL++) {
+                boolean pixelLoad = load[coordsH][coordsL];
+                int pixelCover = cover[coordsH][coordsL];
+                int embeddedPixel = Bit.embedInLSB(pixelCover, pixelLoad);
+                if (newCover[coordsH]== null) newCover[coordsH] = new int[cover[coordsH].length];
+                newCover[coordsH][coordsL] = embeddedPixel;
+            }
+        }
+        return newCover;
     }
 
     // ============================================================================================
