@@ -75,9 +75,8 @@ public final class Bit {
      * @return <code>true</code> if the bit is '1' and <code>false</code> otherwise
      */
     public static boolean getLSB(int value) {
-        int min = Integer.MAX_VALUE;
-        
-        return Helper.fail("NOT IMPLEMENTED");
+        int LSBPosition =0;
+        return getXthBit(value, LSBPosition);
     }
 
     // ============================================================================================
