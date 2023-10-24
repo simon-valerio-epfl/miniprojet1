@@ -62,7 +62,7 @@ public final class Main {
         assert testConversionARGBInt();
         assert testPixelToGray();
         assert testGrayToBinary();
-        //assert testImageToGray();
+        assert testImageToGray();
         //assert testGrayImageToBinary();
         //assert testImageFromGray();
         //assert testImageFromBinary();

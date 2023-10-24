@@ -125,7 +125,16 @@ public final class Image {
      * @return the gray scale version of the image
      */
     public static int[][] toGray(int[][] image){
-        return Helper.fail("NOT IMPLEMENTED");
+        assert image.length > 0;
+        final int[][] res = new int[image.length][];
+        for (int coordH = 0; coordH < image.length; coordH++) {
+            for (int coordL = 0; coordL < image[coordH].length; coordL++) {
+                int pixel = image[coordH][coordL];
+                if (res[coordH] == null) res[coordH] = new int[image[coordH].length];
+                res[coordH][coordL] = Image.gray(pixel);
+            }
+        }
+        return res;
     }
 
     /**
@@ -136,7 +145,7 @@ public final class Image {
      * @return binary representation of the image
      */
     public static boolean[][] toBinary(int[][] image, int threshold){
-        return Helper.fail("NOT IMPLEMENTED");
+        return Helper.fail("a");
     }
 
     /**
