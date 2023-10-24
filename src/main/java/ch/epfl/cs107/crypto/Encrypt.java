@@ -56,8 +56,14 @@ public final class Encrypt {
      * @param keyword the byte array representing the key used to perform the shift
      * @return an encoded byte array
      */
-    public static byte[] vigenere(byte[] plainText, byte[] keyword) {
-        return Helper.fail("NOT IMPLEMENTED");
+    public static byte[] vigenere(byte[] plainText, byte[] keyword){
+        final byte[] res = new byte[plainText.length];
+        for (int i = 0; i < plainText.length; i++) {
+            byte key = keyword[i % keyword.length];
+            byte newCharByte = (byte) (plainText[i] + key);
+            res[i] = newCharByte;
+        }
+        return res;
     }
 
     // ============================================================================================

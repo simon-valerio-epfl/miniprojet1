@@ -54,7 +54,13 @@ public final class Decrypt {
      * @return decoded message
      */
     public static byte[] vigenere(byte[] cipher, byte[] keyword) {
-        return Helper.fail("NOT IMPLEMENTED");
+        final byte[] res = new byte[cipher.length];
+        for (int i = 0; i < cipher.length; i++) {
+            byte key = keyword[i % keyword.length];
+            byte newCharByte = (byte) (cipher[i] - key);
+            res[i] = newCharByte;
+        }
+        return res;
     }
 
     // ============================================================================================
