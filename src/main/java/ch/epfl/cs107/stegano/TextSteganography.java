@@ -65,7 +65,7 @@ public class TextSteganography {
      * @return extracted message
      */
     public static boolean[] revealBitArray(int[][] image) {
-        final boolean[] res = new boolean[image.length];
+        final boolean[] res = new boolean[image.length * image[0].length];
 
         for (int coordsH = 0; coordsH < image.length; coordsH++) { // for each row
             for (int coordsL = 0; coordsL < image[coordsH].length; coordsL++) { // for each pixel in the row

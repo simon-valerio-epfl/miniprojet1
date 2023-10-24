@@ -79,10 +79,11 @@ public final class Main {
         testCrypto(message, key);
         Helper.dialog("Tests ", "Cryptography passed");
         // ========== Test Steganography Methods ==========*/
-        assert testEmbedBWImage();
+        /*assert testEmbedBWImage();
         assert testEmbedText();
         assert testImageSteganographyWithImages("the-starry-night");
-        Helper.dialog("Tests ", "ImageSteganography passed");
+        Helper.dialog("Tests ", "ImageSteganography passed");*/
+        unlockChallenge();
     }
 
     // ============================================================================================
@@ -355,6 +356,11 @@ public final class Main {
         System.out.println("real final is "+finalImg.length+"x"+finalImg[0].length);
         Helper.writeImage(path + File.separator + "test.png", finalImg);
         return Arrays.deepEquals(ImageSteganography.embedARGB(cover, image, IMAGE_THRESHOLD), hidden);
+    }
+
+    private static void unlockChallenge() {
+        var image = Helper.readImage("challenge" + File.separator + "image.png");
+        System.out.println(Text.toString(TextSteganography.revealText(image)));;
     }
 
 }
