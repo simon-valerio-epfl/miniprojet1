@@ -164,7 +164,16 @@ public final class Image {
      * @return <b>gray ARGB</b> representation
      */
     public static int[][] fromGray(int[][] image){
-        return Helper.fail("NOT IMPLEMENTED");
+        assert image.length > 0;
+        final int[][] res = new int[image.length][];
+        for (int coordH = 0; coordH < image.length; coordH++) {
+            for (int coordL = 0; coordL < image[coordH].length; coordL++) {
+                int pixel = image[coordH][coordL];
+                if (res[coordH] == null) res[coordH] = new int[image[coordH].length];
+                res[coordH][coordL] = Image.argb((byte) 0xFF, (byte) pixel, (byte) pixel, (byte) pixel);
+            }
+        }
+        return res;
     }
 
     /**
