@@ -73,7 +73,18 @@ public final class Text {
      * @return <b>UTF-8 String</b> representation of the bit array
      */
     public static String toString(boolean[] bitArray) {
-        return Helper.fail("NOT IMPLEMENTED");
+        int charInString = bitArray.length / 8;
+        byte[] finalBytes = new byte[charInString];
+        for (int i = 0; i < charInString; i++){
+            boolean[] charBytes = new boolean[8];
+            // TODO: should we replace with Sys array copy?
+            for (int j = 0; j < 8; j++) {
+                charBytes[j] = bitArray[i * 8 + j];
+            }
+            byte charByte = Bit.toByte(charBytes);
+            finalBytes[i] = charByte;
+        }
+        return toString(finalBytes);
     }
 
 }
