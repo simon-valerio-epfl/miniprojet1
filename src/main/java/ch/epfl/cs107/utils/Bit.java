@@ -58,8 +58,13 @@ public final class Bit {
      * @return <code>true</code> if the bit is '1' and <code>false</code> otherwise
      */
     public static boolean getXthBit(int value, int pos) {
-        String binaryString = Integer.toBinaryString(value);
-        int newPos = Integer.SIZE - 1 - pos;
+        if (pos > Integer.SIZE) {
+            return Helper.fail("Pos should be less than 32.");
+        }
+        String binaryString = Integer.toBinaryString(value); // for e.g. 1111111 for 255
+        final int zerosToAdd = Integer.SIZE - binaryString.length();
+        binaryString = "0".repeat(zerosToAdd) + binaryString;
+        final int newPos = Integer.SIZE - 1 - pos;
         return binaryString.charAt(newPos) == '1';
     }
 
@@ -70,6 +75,8 @@ public final class Bit {
      * @return <code>true</code> if the bit is '1' and <code>false</code> otherwise
      */
     public static boolean getLSB(int value) {
+        int min = Integer.MAX_VALUE;
+        
         return Helper.fail("NOT IMPLEMENTED");
     }
 
