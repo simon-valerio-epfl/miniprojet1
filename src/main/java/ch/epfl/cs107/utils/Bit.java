@@ -36,7 +36,15 @@ public final class Bit {
      * @return embedded value
      */
     public static int embedInXthBit(int value, boolean m, int pos) {
-        
+        StringBuilder newBinaryString = new StringBuilder();
+        for (int i = 0; i < Integer.SIZE; i++) {
+            if (pos == i) {
+                newBinaryString.append(m ? '1' : '0');
+            } else {
+                newBinaryString.insert(0, getXthBit(value, i) ? '1' : '0');
+            }
+        }
+        return Integer.parseUnsignedInt(newBinaryString.toString(), 2);
     }
 
     /**
