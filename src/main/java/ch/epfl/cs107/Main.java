@@ -60,8 +60,8 @@ public final class Main {
         //Helper.dialog("Tests", "Bit and Text manipulation passed");
         // ========== Test Image ==========
         assert testConversionARGBInt();
-        //assert testPixelToGray();
-        //assert testGrayToBinary();
+        assert testPixelToGray();
+        assert testGrayToBinary();
         //assert testImageToGray();
         //assert testGrayImageToBinary();
         //assert testImageFromGray();
