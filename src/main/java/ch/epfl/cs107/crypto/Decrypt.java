@@ -89,6 +89,15 @@ public final class Decrypt {
             lastCipherBlock = currentCipherBlock;
         }
 
+        if (cipher.length % blockSize != 0) {
+            int startIndex = completeIterationCount * blockSize;
+            byte[] currentCipherBlock = Arrays.copyOfRange(cipher, startIndex, plainText.length);
+            lastCipherBlock = oneTimePad(currentCipherBlock, lastCipherBlock);
+            for (int i = 0; i < lastCipherBlock.length; i++) {
+                plainText[completeIterationCount * blockSize + i] = lastCipherBlock[i];
+            }
+        }
+
         return plainText;
     }
 
