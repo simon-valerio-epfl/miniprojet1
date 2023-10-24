@@ -62,8 +62,8 @@ public final class ImageSteganography {
      */
     public static int[][] embedBW(int[][] cover, boolean[][] load){
         assert load.length <= cover.length && load[0].length <= cover[0].length;
-        System.out.println("cover is " + cover.length + "x" + cover[0].length);
-        System.out.println("load is " + load.length + "x" + load[0].length);
+        //System.out.println("cover is " + cover.length + "x" + cover[0].length);
+        //System.out.println("load is " + load.length + "x" + load[0].length);
 
         final int[][] newCover = new int[cover.length][];
         for (int i = 0; i < cover.length; i++) {
@@ -82,7 +82,7 @@ public final class ImageSteganography {
                 }
             }
         }
-        System.out.println("final is " + newCover.length + "x" + newCover[0].length);
+        //System.out.println("final is " + newCover.length + "x" + newCover[0].length);
         return newCover;
     }
 

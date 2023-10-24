@@ -49,7 +49,6 @@ public final class Main {
      * @implNote PLEASE UNCOMMENT EACH ASSERTION TO CHECK IF YOUR IMPLEMENTATION IS WORKING
      */
     public static void main(String[] args) {
-        /*
         // ========== Test Bit ==========
         assert testXthBit();
         assert testGetLSB();
@@ -78,13 +77,13 @@ public final class Main {
         message = Text.toString(Helper.read("text_one.txt"));
         testCrypto(message, key);
         Helper.dialog("Tests ", "Cryptography passed");
-        // ========== Test Steganography Methods ==========*/
-        /*assert testEmbedBWImage();
+        // ========== Test Steganography Methods ==========
+        assert testEmbedBWImage();
         assert testEmbedText();
         assert testImageSteganographyWithImages("the-starry-night");
-        Helper.dialog("Tests ", "ImageSteganography passed");*/
-        hideMyMessage();
-        readMyMessage();
+        Helper.dialog("Tests ", "ImageSteganography passed");
+        //hideMyMessage();
+        //readMyMessage();
 
         //hideMyImage();
         //readMyImage();
@@ -357,7 +356,7 @@ public final class Main {
         var cover  = Helper.readImage(path + File.separator + "cover.png");
         var hidden = Helper.readImage(path + File.separator + "hidden.png");
         int[][] finalImg = ImageSteganography.embedARGB(cover, image, IMAGE_THRESHOLD);
-        System.out.println("real final is "+finalImg.length+"x"+finalImg[0].length);
+        //System.out.println("real final is "+finalImg.length+"x"+finalImg[0].length);
         Helper.writeImage(path + File.separator + "test.png", finalImg);
         return Arrays.deepEquals(ImageSteganography.embedARGB(cover, image, IMAGE_THRESHOLD), hidden);
     }
