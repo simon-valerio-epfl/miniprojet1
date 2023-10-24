@@ -55,7 +55,7 @@ public final class Bit {
      * @return embedded value
      */
     public static int embedInLSB(int value, boolean m){
-        int LSBPosition =0;
+        int LSBPosition = 0;
         return embedInXthBit(value, m, LSBPosition);
     }
 
@@ -109,11 +109,13 @@ public final class Bit {
      * @return bit array representation of the value
      */
     public static boolean[] toBitArray(byte value){
-
-
-
-
-        return Helper.fail("NOT IMPLEMENTED");
+        // there are 8 bits in a byte
+        // so let's create our array with our final values
+        boolean[] res = new boolean[8];
+        for (int i = 0; i < 8; i++) {
+            res[7 - i] = (value & (1 << i)) != 0;
+        }
+        return res;
     }
 
     /**
@@ -133,7 +135,13 @@ public final class Bit {
      * @return the byte representation of the bit array
      */
     public static byte toByte(boolean[] bitArray){
-        return Helper.fail("NOT IMPLEMENTED");
+        byte res = 0;
+        for (int i = 0; i < 8; i++) {
+            if (bitArray[7 - i]) {
+                res |= (byte) (1 << i);
+            }
+        }
+        return res;
     }
 
 }
