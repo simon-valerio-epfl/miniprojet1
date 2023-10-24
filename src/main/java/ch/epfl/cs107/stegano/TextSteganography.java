@@ -1,6 +1,8 @@
 package ch.epfl.cs107.stegano;
 
 import ch.epfl.cs107.Helper;
+import ch.epfl.cs107.utils.Bit;
+import ch.epfl.cs107.utils.Text;
 
 import static ch.epfl.cs107.utils.Text.*;
 import static ch.epfl.cs107.utils.Image.*;
@@ -34,7 +36,27 @@ public class TextSteganography {
      * @return ARGB image with the message embedded
      */
     public static int[][] embedBitArray(int[][] cover, boolean[] message) {
-        return Helper.fail("NOT IMPLEMENTED");
+        int[][] newCover = new int[cover.length][];
+
+        for (int coordsH = 0; coordsH < cover.length; coordsH++) { // for each row
+            for (int coordsL = 0; coordsL < cover[coordsH].length; coordsL++) { // for each pixel in the row
+                if (newCover[coordsH]== null) newCover[coordsH] = new int[cover[coordsH].length];
+
+                int pixel = cover[coordsH][coordsL];
+
+                int currentMessageIdx = coordsH * cover[coordsH].length + coordsL;
+                boolean hasNextChar = message.length > currentMessageIdx;
+                if (hasNextChar) {
+                    boolean nextChar = message[currentMessageIdx];
+                    int newPixel = embedInLSB(pixel, nextChar);
+                    newCover[coordsH][coordsL] = newPixel;
+                } else {
+                    newCover[coordsH][coordsL] = pixel;
+                }
+            }
+        }
+
+        return newCover;
     }
 
     /**
@@ -43,7 +65,16 @@ public class TextSteganography {
      * @return extracted message
      */
     public static boolean[] revealBitArray(int[][] image) {
-        return Helper.fail("NOT IMPLEMENTED");
+        final boolean[] res = new boolean[image.length];
+
+        for (int coordsH = 0; coordsH < image.length; coordsH++) { // for each row
+            for (int coordsL = 0; coordsL < image[coordsH].length; coordsL++) { // for each pixel in the row
+                int pixel = image[coordsH][coordsL];
+                int currentMessageIdx = coordsH * image[coordsH].length + coordsL;
+                res[currentMessageIdx] = Bit.getLSB(pixel);
+            }
+        }
+        return res;
     }
 
 
@@ -59,7 +90,7 @@ public class TextSteganography {
      * @return ARGB image with the message embedded
      */
     public static int[][] embedText(int[][] cover, byte[] message) {
-        return Helper.fail("NOT IMPLEMENTED");
+        return embedBitArray(cover, Text.toBitArray(Text.toString(message)));
     }
 
     /**
@@ -68,7 +99,7 @@ public class TextSteganography {
      * @return extracted message
      */
     public static byte[] revealText(int[][] image) {
-        return Helper.fail("NOT IMPLEMENTED");
+        return Text.toBytes(Text.toString(revealBitArray(image)));
     }
 
 }

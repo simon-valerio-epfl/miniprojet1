@@ -79,7 +79,7 @@ public final class Main {
         Helper.dialog("Tests ", "Cryptography passed");
         // ========== Test Steganography Methods ==========
         assert testEmbedBWImage();
-        //assert testEmbedText();
+        assert testEmbedText();
         //assert testImageSteganographyWithImages("the-starry-night");
         Helper.dialog("Tests ", "ImageSteganography passed");
     }
