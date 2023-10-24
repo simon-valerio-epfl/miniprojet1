@@ -139,10 +139,13 @@ public final class Helper {
     public static void writeImage(String path, int[][] image) {
         assert nonNull(path);
         assert nonNull(image);
+        System.out.println("writing is "+image.length+"x"+image[0].length);
         try {
             final var buffer = new BufferedImage(image[0].length, image.length, BufferedImage.TYPE_4BYTE_ABGR);
+            System.out.println(buffer.getHeight()+" en hauteur et "+buffer.getWidth()+" en largeur");
             for(var x = 0; x < buffer.getHeight(); ++x){
                 for(var y = 0 ; y < buffer.getWidth(); ++y){
+                    //System.out.println("x: "+x+", y: "+y);
                     buffer.setRGB(y, x, image[x][y]);
                 }
             }

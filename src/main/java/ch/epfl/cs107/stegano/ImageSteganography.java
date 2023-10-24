@@ -69,12 +69,16 @@ public final class ImageSteganography {
             newCover[i] = new int[cover[i].length];
         }
 
-        for (int coordsH = 0; coordsH < load.length; coordsH++) {
-            for (int coordsL = 0; coordsL < load[coordsH].length; coordsL++) {
-                boolean pixelLoad = load[coordsH][coordsL];
+        for (int coordsH = 0; coordsH < cover.length; coordsH++) {
+            for (int coordsL = 0; coordsL < cover[coordsH].length; coordsL++) {
                 int pixelCover = cover[coordsH][coordsL];
-                int embeddedPixel = Bit.embedInLSB(pixelCover, pixelLoad);
-                newCover[coordsH][coordsL] = embeddedPixel;
+                if (load.length > coordsH && load[coordsH].length > coordsL) {
+                    boolean pixelLoad = load[coordsH][coordsL];
+                    int embeddedPixel = Bit.embedInLSB(pixelCover, pixelLoad);
+                    newCover[coordsH][coordsL] = embeddedPixel;
+                } else {
+                    newCover[coordsH][coordsL] = pixelCover;
+                }
             }
         }
         System.out.println("final is " + newCover.length + "x" + newCover[0].length);
