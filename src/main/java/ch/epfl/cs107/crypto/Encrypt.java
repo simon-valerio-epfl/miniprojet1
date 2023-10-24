@@ -112,7 +112,13 @@ public final class Encrypt {
      * @return an encoded byte array
      */
     public static byte[] oneTimePad(byte[] plainText, byte[] pad) {
-        return Helper.fail("NOT IMPLEMENTED");
+        final byte[] cipherText = new byte[plainText.length];
+
+        for (int i = 0; i < plainText.length; i++) {
+            cipherText[i] = (byte) (plainText[i] ^ pad[i]);
+        }
+
+        return cipherText;
     }
 
     /**
@@ -122,7 +128,7 @@ public final class Encrypt {
      * @param result Array containing the result after the execution
      */
     public static void oneTimePad(byte[] plainText, byte[] pad, byte[] result) {
-        Helper.fail("NOT IMPLEMENTED");
+        // ???
     }
 
 }
