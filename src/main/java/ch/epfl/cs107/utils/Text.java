@@ -73,6 +73,7 @@ public final class Text {
      * @return <b>UTF-8 String</b> representation of the bit array
      */
     public static String toString(boolean[] bitArray) {
+        assert bitArray.length > 0;
         int charInString = bitArray.length / 8;
         byte[] finalBytes = new byte[charInString];
         for (int i = 0; i < charInString; i++){

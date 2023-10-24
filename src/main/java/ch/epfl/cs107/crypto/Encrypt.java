@@ -141,6 +141,7 @@ public final class Encrypt {
      * @return an encoded byte array
      */
     public static byte[] oneTimePad(byte[] plainText, byte[] pad) {
+        assert pad.length >= plainText.length;
         final byte[] cipherText = new byte[plainText.length];
 
         for (int i = 0; i < plainText.length; i++) {

@@ -61,6 +61,7 @@ public final class ImageSteganography {
      * @return ARGB image with the image embedded on the cover
      */
     public static int[][] embedBW(int[][] cover, boolean[][] load){
+        assert load.length <= cover.length && load[0].length <= cover[0].length;
         System.out.println("cover is " + cover.length + "x" + cover[0].length);
         System.out.println("load is " + load.length + "x" + load[0].length);
 

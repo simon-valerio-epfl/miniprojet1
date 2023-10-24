@@ -135,6 +135,7 @@ public final class Bit {
      * @return the byte representation of the bit array
      */
     public static byte toByte(boolean[] bitArray){
+        assert bitArray.length > 0;
         byte res = 0;
         for (int i = 0; i < 8; i++) {
             if (bitArray[7 - i]) {
