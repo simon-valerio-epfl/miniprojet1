@@ -37,7 +37,10 @@ public final class Image {
      * @return packed value of the pixel
      */
     public static int argb(byte alpha, byte red, byte green, byte blue){
-        return Helper.fail("NOT IMPLEMENTED");
+        return ((alpha & 0xFF) << 24) |
+                ((red & 0xFF) << 16) |
+                ((green & 0xFF) << 8) |
+                (blue & 0xFF);
     }
 
     /**
@@ -47,7 +50,9 @@ public final class Image {
      * @return the alpha component of the pixel
      */
     public static byte alpha(int pixel){
-        return Helper.fail("NOT IMPLEMENTED");
+        System.out.println(pixel);
+        // we move the bits to the right (bc alpha is 31-24)
+        return (byte) (pixel >> 24);
     }
 
     /**
@@ -56,8 +61,9 @@ public final class Image {
      * @param pixel packed value of the pixel
      * @return the red component of the pixel
      */
-    public static byte red(int pixel){
-        return Helper.fail("NOT IMPLEMENTED");
+    public static byte red(int pixel) {
+        // we move the bits to the right (bc red is 23-16) and we only keep the first 8 bits
+        return (byte) ((pixel >> 16) & 0xFF);
     }
 
     /**
@@ -67,7 +73,8 @@ public final class Image {
      * @return the green component of the pixel
      */
     public static byte green(int pixel){
-        return Helper.fail("NOT IMPLEMENTED");
+        // same here, green is 15-8
+        return (byte) ((pixel >> 8) & 0xFF);
     }
 
     /**
@@ -77,7 +84,7 @@ public final class Image {
      * @return the blue component of the pixel
      */
     public static byte blue(int pixel){
-        return Helper.fail("NOT IMPLEMENTED");
+        return (byte) (pixel & 0xFF);
     }
 
     /**
