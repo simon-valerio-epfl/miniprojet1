@@ -36,7 +36,7 @@ public final class Bit {
      * @return embedded value
      */
     public static int embedInXthBit(int value, boolean m, int pos) {
-        return Helper.fail("NOT IMPLEMENTED");
+        
     }
 
     /**
@@ -47,7 +47,8 @@ public final class Bit {
      * @return embedded value
      */
     public static int embedInLSB(int value, boolean m){
-        return Helper.fail("NOT IMPLEMENTED");
+        int LSBPosition =0;
+        return embedInXthBit(value, m, LSBPosition);
     }
 
     /**
@@ -100,6 +101,10 @@ public final class Bit {
      * @return bit array representation of the value
      */
     public static boolean[] toBitArray(byte value){
+
+
+
+
         return Helper.fail("NOT IMPLEMENTED");
     }
 
