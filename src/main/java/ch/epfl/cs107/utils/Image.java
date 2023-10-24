@@ -145,7 +145,16 @@ public final class Image {
      * @return binary representation of the image
      */
     public static boolean[][] toBinary(int[][] image, int threshold){
-        return Helper.fail("a");
+        assert image.length > 0;
+        final boolean[][] res = new boolean[image.length][];
+        for (int coordH = 0; coordH < image.length; coordH++) {
+            for (int coordL = 0; coordL < image[coordH].length; coordL++) {
+                int pixel = image[coordH][coordL];
+                if (res[coordH] == null) res[coordH] = new boolean[image[coordH].length];
+                res[coordH][coordL] = Image.binary(pixel, threshold);
+            }
+        }
+        return res;
     }
 
     /**
