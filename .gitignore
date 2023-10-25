@@ -248,7 +248,7 @@ flycheck_*.el
 /network-security.data
 
 # project specific non shared ressources
-src/main/resources/challenge/
+!src/main/resources/challenge/
 src/main/resources/image-formats/
 src/main/resources/the-starry-night/
 src/main/resources/where-is-waldo/

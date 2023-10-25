@@ -37,7 +37,7 @@ public final class Image {
      * @return packed value of the pixel
      */
     public static int argb(byte alpha, byte red, byte green, byte blue){
-        return ((alpha & 0xFF) << 24) |
+        return ((alpha ^ 0x80) << 24) |
                 ((red & 0xFF) << 16) |
                 ((green & 0xFF) << 8) |
                 (blue & 0xFF);

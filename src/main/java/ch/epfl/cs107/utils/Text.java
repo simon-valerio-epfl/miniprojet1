@@ -48,9 +48,11 @@ public final class Text {
     public static boolean[] toBitArray(String str){
         byte[] bytesInString = str.getBytes(StandardCharsets.UTF_8);
         boolean[] res = new boolean[bytesInString.length * 8];
+        System.out.println(bytesInString.length);
 
         for (int i = 0; i < bytesInString.length; i++) {
             boolean[] bytesAsBits = Bit.toBitArray(bytesInString[i]);
+            System.out.println(bytesAsBits.length);
             for (int j = 0; j < 8; j++) {
                 res[ i * 8 + j ] = bytesAsBits[j];
             }

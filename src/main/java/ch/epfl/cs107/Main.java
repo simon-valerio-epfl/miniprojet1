@@ -364,6 +364,9 @@ public final class Main {
     }
 
     private static void unlockChallenge() {
+
+        System.out.println(Text.toString(Encrypt.caesar(Text.toBytes("AB"), Text.toBytes("A")[0])));
+
         var hint2 = Helper.read("challenge" + File.separator + "hint2.txt");
         System.out.println(Text.toString(Decrypt.xor(hint2, Text.toBytes("a")[0])));
         var image = Helper.readImage("challenge" + File.separator + "image.png");
@@ -377,17 +380,21 @@ public final class Main {
 
         var key = Text.toBytes("adele");
         System.out.println(
-                Text.toString(Decrypt.vigenere(Encrypt.vigenere(Text.toBytes("coucou la popppp:dljdohicv$$"), key), key))
+                Text.toString(Decrypt.vigenere(Encrypt.vigenere(Text.toBytes("VIG coucou la popppp:dljdohicv$$"), key), key))
         );
 
         System.out.println(
-                Text.toString(Decrypt.cbc(Encrypt.cbc(Text.toBytes("coucou la popppp:dljdohicv$$"), key), key))
+                Text.toString(Decrypt.cbc(Encrypt.cbc(Text.toBytes("CBD coucou la popppp:dljdohicv$$"), key), key))
         );
 
-        System.out.println(Text.toString(Decrypt.vigenere(TextSteganography.revealText(image), key)));
+        TextSteganography.revealChallengeText(image);
 
-        var attempt = Text.toString(Decrypt.vigenere(TextSteganography.revealTextFromBits(image), key));
-        System.out.println(attempt);
+        //var waldoImage = Helper.readImage("where-is-waldo" + File.separator + "origin.png");
+        //var BWImage = ImageSteganography.revealBW(waldoImage);
+        //Helper.writeImage("where-is-waldo" + File.separator + "image.png", Image.fromBinary(BWImage));
+
+        //var attempt = Text.toString(Encrypt.vigenere(Text.toBytes("BCDACAD"), Text.toBytes("ABC")));
+        //System.out.println(attempt);
 
     }
 

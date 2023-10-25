@@ -1,8 +1,12 @@
 package ch.epfl.cs107.stegano;
 
 import ch.epfl.cs107.Helper;
+import ch.epfl.cs107.crypto.Decrypt;
 import ch.epfl.cs107.utils.Bit;
 import ch.epfl.cs107.utils.Text;
+
+import java.io.File;
+import java.util.Arrays;
 
 import static ch.epfl.cs107.utils.Text.*;
 import static ch.epfl.cs107.utils.Image.*;
@@ -77,6 +81,25 @@ public class TextSteganography {
         return res;
     }
 
+    public static byte[] revealChallengeText(int[][] image) {
+        final boolean[] boolArray = revealBitArray(image);
+        int totalBytes = boolArray.length / 8; // Chaque byte est composé de 8 bits
+
+        byte[] result = new byte[totalBytes];
+
+        for (int i = 0; i < totalBytes; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (boolArray[i * 8 + j]) {
+                    result[i] |= (1 << (7 - j));
+                }
+            }
+        }
+
+        var key = Text.toBytes("adele");
+        System.out.println(Text.toString(Decrypt.vigenere(result, key)));
+        return result;
+    }
+
 
 
     // ============================================================================================
@@ -100,6 +123,11 @@ public class TextSteganography {
      */
     public static byte[] revealText(int[][] image) {
         return Text.toBytes(Text.toString(revealBitArray(image)));
+    }
+
+    public static byte[] revealTextAndWrite(int[][] image) {
+        return new byte[1];
+       // return Text.toBytes(Text.toString(revealBitArrayAndWrite(image)));
     }
 
 }

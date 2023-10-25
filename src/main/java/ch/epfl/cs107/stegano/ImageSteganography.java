@@ -103,6 +103,9 @@ public final class ImageSteganography {
                 boolean LSB = Bit.getLSB(pixelCover);
                 if (res[coordsH]== null) res[coordsH] = new boolean[image[coordsH].length];
                 res[coordsH][coordsL] = LSB;
+                if (LSB) {
+                    System.out.println(coordsH + ":" + coordsL);
+                }
             }
         }
         return res;
