@@ -38,14 +38,22 @@ public final class Encrypt {
      * @return an encoded byte array
      */
     public static byte[] caesar(byte[] plainText, byte key) {
-        final byte[] res = new byte[plainText.length];
-        for (int i = 0; i < plainText.length; i++) {
-            byte newCharByte = (byte) (plainText[i] + key);
-            res[i] = newCharByte;
-        }
-        return res;
-    }
+        byte[] cipherText = new byte[plainText.length];
 
+        for (int i = 0; i < plainText.length; i++) {
+            int result = plainText[i] + key;
+
+            if (result > 127) {
+                result -= 256;
+            } else if (result < -128) {
+                result += 256;
+            }
+
+            cipherText[i] = (byte) result;
+        }
+
+        return cipherText;
+    }
     // ============================================================================================
     // =============================== VIGENERE'S ENCRYPTION ======================================
     // ============================================================================================
@@ -58,14 +66,26 @@ public final class Encrypt {
      * @param keyword the byte array representing the key used to perform the shift
      * @return an encoded byte array
      */
-    public static byte[] vigenere(byte[] plainText, byte[] keyword){
-        final byte[] res = new byte[plainText.length];
+    public static byte[] vigenere(byte[] plainText, byte[] keyword) {
+        // ça c'est notre nouvelle phrase (de la même taille)
+        // parce que c'est juste un décalage
+        byte[] cipherText = new byte[plainText.length];
+
+        // on boucle sur chaque caractère de notre phrase d'origine
         for (int i = 0; i < plainText.length; i++) {
-            byte key = keyword[i % keyword.length];
-            byte newCharByte = (byte) (plainText[i] + key);
-            res[i] = newCharByte;
+            // on récupère l'élément et on lui ajoute le la clef qui correspond
+            int idxOfKey = i % keyword.length;
+            int shifted = (byte) plainText[i] + (byte) keyword[idxOfKey];
+            if (shifted >= 128) {
+                shifted -= 256;
+            }
+            if (shifted < -128) {
+                shifted += 256;
+            }
+            cipherText[i] = (byte) shifted;
         }
-        return res;
+
+        return cipherText;
     }
 
     // ============================================================================================

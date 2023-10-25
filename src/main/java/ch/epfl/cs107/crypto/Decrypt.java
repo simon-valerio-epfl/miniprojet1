@@ -37,15 +37,24 @@ public final class Decrypt {
      * @return decoded message
      */
     public static byte[] caesar(byte[] cipher, byte key) {
-        final byte[] res = new byte[cipher.length];
+        byte[] plainText = new byte[cipher.length];
+
         for (int i = 0; i < cipher.length; i++) {
-            byte newCharByte = (byte) (cipher[i] - key);
-            res[i] = newCharByte;
+            int result = cipher[i] - key;
+
+            if (result > 127) {
+                result -= 256;
+            } else if (result < -128) {
+                result += 256;
+            }
+
+            plainText[i] = (byte) result;
         }
-        return res;
+
+        return plainText;
     }
 
-    // ============================================================================================
+// ============================================================================================
     // =============================== VIGENERE'S ENCRYPTION ======================================
     // ============================================================================================
 
@@ -56,13 +65,25 @@ public final class Decrypt {
      * @return decoded message
      */
     public static byte[] vigenere(byte[] cipher, byte[] keyword) {
-        final byte[] res = new byte[cipher.length];
+        // ça c'est notre nouvelle phrase (de la même taille)
+        // parce que c'est juste un décalage
+        byte[] plainText = new byte[cipher.length];
+
+        // on boucle sur chaque caractère de notre phrase d'origine
         for (int i = 0; i < cipher.length; i++) {
-            byte key = keyword[i % keyword.length];
-            byte newCharByte = (byte) (cipher[i] - key);
-            res[i] = newCharByte;
+            // on récupère l'élément et on lui ajoute le la clef qui correspond
+            int idxOfKey = i % keyword.length;
+            int shifted = (byte) cipher[i] - (byte) keyword[idxOfKey];
+            if (shifted >= 128) {
+                shifted -= 256;
+            }
+            if (shifted < -128) {
+                shifted += 256;
+            }
+            plainText[i] = (byte) shifted;
         }
-        return res;
+
+        return plainText;
     }
 
     // ============================================================================================
