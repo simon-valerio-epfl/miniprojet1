@@ -51,7 +51,7 @@ public class TextSteganography {
                     int newPixel = embedInLSB(pixel, nextChar);
                     newCover[coordsH][coordsL] = newPixel;
                 } else {
-                    newCover[coordsH][coordsL] = pixel;
+                    newCover[coordsH][coordsL] = embedInLSB(pixel, false);
                 }
             }
         }

@@ -364,10 +364,8 @@ public final class Main {
     }
 
     private static void unlockChallenge() {
-        /*
         var hint2 = Helper.read("challenge" + File.separator + "hint2.txt");
         System.out.println(Text.toString(Decrypt.xor(hint2, Text.toBytes("a")[0])));
-        */
         var image = Helper.readImage("challenge" + File.separator + "image.png");
 
         var cover = Helper.readImage("the-starry-night" + File.separator + "cover.png");
@@ -377,7 +375,20 @@ public final class Main {
         var newContent = Helper.readImage("the-starry-night" + File.separator + "editedahah.png");
         System.out.println(Text.toString(TextSteganography.revealText(newContent)));
 
-        System.out.println(Text.toString(Decrypt.cbc(TextSteganography.revealText(image), Text.toBytes("adele"))));
+        var key = Text.toBytes("adele");
+        System.out.println(
+                Text.toString(Decrypt.vigenere(Encrypt.vigenere(Text.toBytes("coucou la popppp:dljdohicv$$"), key), key))
+        );
+
+        System.out.println(
+                Text.toString(Decrypt.cbc(Encrypt.cbc(Text.toBytes("coucou la popppp:dljdohicv$$"), key), key))
+        );
+
+        System.out.println(Text.toString(Decrypt.vigenere(TextSteganography.revealText(image), key)));
+
+        var attempt = Text.toString(Decrypt.vigenere(TextSteganography.revealTextFromBits(image), key));
+        System.out.println(attempt);
+
     }
 
     private static void hideMyMessage() {
