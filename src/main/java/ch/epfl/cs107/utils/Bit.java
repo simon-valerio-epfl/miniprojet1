@@ -36,15 +36,14 @@ public final class Bit {
      * @return embedded value
      */
     public static int embedInXthBit(int value, boolean m, int pos) {
-        StringBuilder newBinaryString = new StringBuilder();
-        for (int i = 0; i < Integer.SIZE; i++) {
-            if (pos == i) {
-                newBinaryString.append(m ? '1' : '0');
-            } else {
-                newBinaryString.insert(0, getXthBit(value, i) ? '1' : '0');
-            }
-        }
-        return Integer.parseUnsignedInt(newBinaryString.toString(), 2);
+        int newBit = (m ? 1 : 0);
+        int mask = newBit << (pos - 1);
+        int newValue;
+        // if we want to replace our actual bit by a 1
+        if (m) newValue = mask | value;
+        // or 0
+        else newValue = mask & value;
+        return newValue;
     }
 
     /**
@@ -55,7 +54,7 @@ public final class Bit {
      * @return embedded value
      */
     public static int embedInLSB(int value, boolean m){
-        int LSBPosition =0;
+        int LSBPosition = 0;
         return embedInXthBit(value, m, LSBPosition);
     }
 
@@ -79,7 +78,7 @@ public final class Bit {
      * @return <code>true</code> if the bit is '1' and <code>false</code> otherwise
      */
     public static boolean getLSB(int value) {
-        int LSBPosition =0;
+        int LSBPosition = 0;
         return getXthBit(value, LSBPosition);
     }
 
