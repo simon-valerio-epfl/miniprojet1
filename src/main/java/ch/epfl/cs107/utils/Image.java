@@ -37,7 +37,14 @@ public final class Image {
      * @return packed value of the pixel
      */
     public static int argb(byte alpha, byte red, byte green, byte blue){
-        return Helper.fail("NOT IMPLEMENTED");
+        int pixel = 0;
+        byte[] components = {blue, green, red, alpha};
+        for (int i = 0; i < components.length; i++) {
+            // TODO: understand why it works
+            int componentValue = (components[i] & 255) << i*Byte.SIZE;
+            pixel |= componentValue;
+        }
+        return pixel;
     }
 
     /**
@@ -47,7 +54,7 @@ public final class Image {
      * @return the alpha component of the pixel
      */
     public static byte alpha(int pixel){
-        return Helper.fail("NOT IMPLEMENTED");
+        return extractPrimaryComponent(pixel, 3);
     }
 
     /**
@@ -57,7 +64,7 @@ public final class Image {
      * @return the red component of the pixel
      */
     public static byte red(int pixel){
-        return Helper.fail("NOT IMPLEMENTED");
+        return extractPrimaryComponent(pixel, 2);
     }
 
     /**
@@ -67,7 +74,7 @@ public final class Image {
      * @return the green component of the pixel
      */
     public static byte green(int pixel){
-        return Helper.fail("NOT IMPLEMENTED");
+        return extractPrimaryComponent(pixel, 1);
     }
 
     /**
@@ -77,7 +84,7 @@ public final class Image {
      * @return the blue component of the pixel
      */
     public static byte blue(int pixel){
-        return Helper.fail("NOT IMPLEMENTED");
+        return extractPrimaryComponent(pixel, 0);
     }
 
     /**
@@ -87,7 +94,7 @@ public final class Image {
      * @return gray scaling of the given pixel
      */
     public static int gray(int pixel){
-        return Helper.fail("NOT IMPLEMENTED");
+        return 0;
     }
 
     /**
@@ -152,7 +159,7 @@ public final class Image {
         int shift = Byte.SIZE*componentPos;
         pixel >>= shift;
         pixel &= mask;
-        System.out.println(pixel);
         return (byte) pixel;
     }
+
 }

@@ -50,11 +50,6 @@ public final class Main {
      */
     public static void main(String[] args) {
 
-        Image.extractPrimaryComponent(23, 1);
-
-
-
-
         for (int i = 0; i < 8; i++) {
             System.out.println(Bit.toByte(Bit.toBitArray(Bit.toByte(new boolean[]{true, true, true, true, true, true, false, false}))));
         }
@@ -70,9 +65,10 @@ public final class Main {
         // ========== Test Text ==========
         assert testToBitArray();
         Helper.dialog("Tests", "Bit and Text manipulation passed");
-        /*
+
         // ========== Test Image ==========
-        //assert testConversionARGBInt();
+        assert testConversionARGBInt();
+        /*
         //assert testPixelToGray();
         //assert testGrayToBinary();
         //assert testImageToGray();
