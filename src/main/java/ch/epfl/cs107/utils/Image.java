@@ -27,6 +27,10 @@ public final class Image {
     // ==================================== PIXEL MANIPULATION ====================================
     // ============================================================================================
 
+    public static int signedToUnsignedInt(int signed) {
+        return signed & 255;
+    }
+
     /**
      * Build a given pixel value from its respective components
      *
@@ -40,8 +44,7 @@ public final class Image {
         int pixel = 0;
         byte[] components = {blue, green, red, alpha};
         for (int i = 0; i < components.length; i++) {
-            // we use & 255 to convert our signed byte to an unsigned integer
-            int componentValue = (components[i] & 255) << i*Byte.SIZE;
+            int componentValue = signedToUnsignedInt(components[i]) << i*Byte.SIZE;
             pixel |= componentValue;
         }
         return pixel;
@@ -94,7 +97,12 @@ public final class Image {
      * @return gray scaling of the given pixel
      */
     public static int gray(int pixel){
-        return 0;
+        int red = signedToUnsignedInt(red(pixel));
+        int green = signedToUnsignedInt(green(pixel));
+        int blue = signedToUnsignedInt(blue(pixel));
+        // TODO: demander à Fabrice si c'est bien de faire une variable avant de return direct
+        int gray = (red + green + blue) / 3;
+        return gray;
     }
 
     /**
