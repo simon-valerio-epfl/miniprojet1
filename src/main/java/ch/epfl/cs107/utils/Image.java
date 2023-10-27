@@ -113,6 +113,7 @@ public final class Image {
      * @return binary representation of a pixel
      */
     public static boolean binary(int gray, int threshold){
+        assert gray>0 && gray <255;
         return gray >= threshold;
     }
 

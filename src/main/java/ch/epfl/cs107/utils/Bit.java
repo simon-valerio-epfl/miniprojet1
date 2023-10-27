@@ -146,7 +146,6 @@ public final class Bit {
      */
     public static byte[] toBytes (boolean[] bitArray) {
         int processedBitCount = 0;
-
         int padding = bitArray.length % Byte.SIZE == 0 ? 0 : 1;
         int byteCount = bitArray.length / Byte.SIZE + padding;
 
