@@ -113,7 +113,7 @@ public final class Image {
      * @return binary representation of a pixel
      */
     public static boolean binary(int gray, int threshold){
-        return Helper.fail("NOT IMPLEMENTED");
+        return gray >= threshold;
     }
 
     // ============================================================================================
@@ -127,7 +127,17 @@ public final class Image {
      * @return the gray scale version of the image
      */
     public static int[][] toGray(int[][] image){
-        return Helper.fail("NOT IMPLEMENTED");
+        assert image.length > 0;
+
+        int[][] newImage = new int[image.length][image[0].length];
+
+        for (int h = 0; h < image.length; h++) {
+            for (int w = 0; w < image[0].length; w++) {
+                newImage[h][w] = gray(image[h][w]);
+            }
+        }
+
+        return newImage;
     }
 
     /**
@@ -138,7 +148,17 @@ public final class Image {
      * @return binary representation of the image
      */
     public static boolean[][] toBinary(int[][] image, int threshold){
-        return Helper.fail("NOT IMPLEMENTED");
+        assert image.length > 0;
+        
+        boolean[][] newImage = new boolean[image.length][image[0].length];
+
+        for (int h = 0; h < image.length; h++) {
+            for (int w = 0; w < image[0].length; w++) {
+                newImage[h][w] = binary(image[h][w], threshold);
+            }
+        }
+
+        return newImage;
     }
 
     /**
