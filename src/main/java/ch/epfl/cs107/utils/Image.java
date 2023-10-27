@@ -40,7 +40,7 @@ public final class Image {
         int pixel = 0;
         byte[] components = {blue, green, red, alpha};
         for (int i = 0; i < components.length; i++) {
-            // TODO: understand why it works
+            // we use & 255 to convert our signed byte to an unsigned integer
             int componentValue = (components[i] & 255) << i*Byte.SIZE;
             pixel |= componentValue;
         }
