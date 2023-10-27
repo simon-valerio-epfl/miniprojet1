@@ -100,9 +100,7 @@ public final class Image {
         int red = signedToUnsignedInt(red(pixel));
         int green = signedToUnsignedInt(green(pixel));
         int blue = signedToUnsignedInt(blue(pixel));
-        // TODO: demander à Fabrice si c'est bien de faire une variable avant de return direct
-        int gray = (red + green + blue) / 3;
-        return gray;
+        return (red + green + blue) / 3;
     }
 
     /**

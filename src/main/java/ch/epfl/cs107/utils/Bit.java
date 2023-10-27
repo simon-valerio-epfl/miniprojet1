@@ -27,6 +27,8 @@ public final class Bit {
     // ==================================== BIT MANIPULATION ======================================
     // ============================================================================================
 
+    public static final int MAX_VALUE_FOR_BYTE = 255;
+
     /**
      * Embed a bit in a given integer bits
      * <p>
