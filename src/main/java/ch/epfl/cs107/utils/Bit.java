@@ -38,6 +38,7 @@ public final class Bit {
      * @return embedded value
      */
     public static int embedInXthBit(int value, boolean m, int pos) {
+        assert value !=0 && pos >=0 && pos<=Integer.SIZE ;
         int mask = 1 << pos;
         int reversedMask = ~mask;
         int newValue;
@@ -68,7 +69,7 @@ public final class Bit {
      * @return <code>true</code> if the bit is '1' and <code>false</code> otherwise
      */
     public static boolean getXthBit(int value, int pos) {
-        assert (pos <= Integer.SIZE);
+        assert (pos <= Integer.SIZE && pos>=0);
         int mask = 1 << pos;
         return (value & mask) != 0;
     }
