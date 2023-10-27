@@ -36,13 +36,13 @@ public final class Bit {
      * @return embedded value
      */
     public static int embedInXthBit(int value, boolean m, int pos) {
-        int newBit = (m ? 1 : 0);
-        int mask = newBit << (pos - 1);
+        int mask = 1 << pos;
+        int reversedMask = ~mask;
         int newValue;
         // if we want to replace our actual bit by a 1
-        if (m) newValue = mask | value;
+        if (m) newValue = value | mask;
         // or 0
-        else newValue = mask & value;
+        else newValue = value & reversedMask;
         return newValue;
     }
 
