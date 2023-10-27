@@ -103,11 +103,11 @@ public final class Bit {
      * @return bit array representation of the value
      */
     public static boolean[] toBitArray(byte value){
-
-
-
-
-        return Helper.fail("NOT IMPLEMENTED");
+        boolean[] bitArray = new boolean[Byte.SIZE];
+        for (int i = 0; i < Byte.SIZE; i++) {
+            bitArray[Byte.SIZE-(i+1)] = getXthBit(value, i);
+        }
+        return bitArray;
     }
 
     /**
@@ -127,7 +127,15 @@ public final class Bit {
      * @return the byte representation of the bit array
      */
     public static byte toByte(boolean[] bitArray){
-        return Helper.fail("NOT IMPLEMENTED");
+        assert (bitArray.length != 0);
+        byte myByte = 0;
+        for(boolean bit: bitArray){
+            myByte <<= 1;
+            if (bit) {
+                myByte += 1;
+            }
+        }
+        return myByte;
     }
 
 }

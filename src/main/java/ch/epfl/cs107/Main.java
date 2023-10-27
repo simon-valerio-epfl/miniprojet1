@@ -49,8 +49,9 @@ public final class Main {
      * @implNote PLEASE UNCOMMENT EACH ASSERTION TO CHECK IF YOUR IMPLEMENTATION IS WORKING
      */
     public static void main(String[] args) {
-
-        System.out.println(Bit.getXthBit(8, 33));
+        for (int i = 0; i < 8; i++) {
+            System.out.println(Bit.toByte(Bit.toBitArray(Bit.toByte(new boolean[]{true, true, true, true, true, true, false, false}))));
+        }
 
         // ========== Test Bit ==========
         //assert testXthBit();
