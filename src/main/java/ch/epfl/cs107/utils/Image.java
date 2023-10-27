@@ -149,7 +149,7 @@ public final class Image {
      */
     public static boolean[][] toBinary(int[][] image, int threshold){
         assert image.length > 0;
-        
+
         boolean[][] newImage = new boolean[image.length][image[0].length];
 
         for (int h = 0; h < image.length; h++) {
@@ -168,7 +168,18 @@ public final class Image {
      * @return <b>gray ARGB</b> representation
      */
     public static int[][] fromGray(int[][] image){
-        return Helper.fail("NOT IMPLEMENTED");
+        assert image.length > 0;
+
+        int[][] newImage = new int[image.length][image[0].length];
+
+        for (int h = 0; h < image.length; h++) {
+            for (int w = 0; w < image[0].length; w++) {
+                byte grayPixel = (byte) image[h][w];
+                newImage[h][w] = argb((byte) 0xFF, grayPixel, grayPixel, grayPixel);
+            }
+        }
+
+        return newImage;
     }
 
     /**
@@ -178,7 +189,19 @@ public final class Image {
      * @return <b>black and white ARGB</b> representation
      */
     public static int[][] fromBinary(boolean[][] image){
-        return Helper.fail("NOT IMPLEMENTED");
+        assert image.length > 0;
+
+        int[][] newImage = new int[image.length][image[0].length];
+
+        for (int h = 0; h < image.length; h++) {
+            for (int w = 0; w < image[0].length; w++) {
+                boolean isWhite = image[h][w];
+                byte blackOrWhite = (byte) (isWhite ? 0xFF : 0);
+                newImage[h][w] = argb((byte) 0xFF, blackOrWhite, blackOrWhite, blackOrWhite);
+            }
+        }
+
+        return newImage;
     }
 
     public static byte extractPrimaryComponent(int pixel, int componentPos){
