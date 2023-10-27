@@ -146,4 +146,13 @@ public final class Image {
         return Helper.fail("NOT IMPLEMENTED");
     }
 
+    public static byte extractPrimaryComponent(int pixel, int componentPos){
+        assert (componentPos<=3 && componentPos>=0);
+        int mask = 255;
+        int shift = Byte.SIZE*componentPos;
+        pixel >>= shift;
+        pixel &= mask;
+        System.out.println(pixel);
+        return (byte) pixel;
+    }
 }
