@@ -49,6 +49,9 @@ public final class Main {
      * @implNote PLEASE UNCOMMENT EACH ASSERTION TO CHECK IF YOUR IMPLEMENTATION IS WORKING
      */
     public static void main(String[] args) {
+
+        System.out.println(Bit.getXthBit(8, 33));
+
         // ========== Test Bit ==========
         //assert testXthBit();
         //assert testGetLSB();
@@ -57,7 +60,7 @@ public final class Main {
         //assert testByteConversion();
         // ========== Test Text ==========
         //assert testToBitArray();
-        Helper.dialog("Tests", "Bit and Text manipulation passed");
+        /*Helper.dialog("Tests", "Bit and Text manipulation passed");
         // ========== Test Image ==========
         //assert testConversionARGBInt();
         //assert testPixelToGray();
@@ -81,7 +84,7 @@ public final class Main {
         //assert testEmbedBWImage();
         //assert testEmbedText();
         //assert testImageSteganographyWithImages("the-starry-night");
-        Helper.dialog("Tests ", "ImageSteganography passed");
+        Helper.dialog("Tests ", "ImageSteganography passed");*/
     }
 
     // ============================================================================================
