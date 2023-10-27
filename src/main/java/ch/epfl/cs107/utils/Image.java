@@ -131,9 +131,9 @@ public final class Image {
 
         int[][] newImage = new int[image.length][image[0].length];
 
-        for (int h = 0; h < image.length; h++) {
-            for (int w = 0; w < image[0].length; w++) {
-                newImage[h][w] = gray(image[h][w]);
+        for (int x = 0; x < image.length; x++) {
+            for (int y = 0; y < image[0].length; y++) {
+                newImage[x][y] = gray(image[x][y]);
             }
         }
 
@@ -152,9 +152,9 @@ public final class Image {
 
         boolean[][] newImage = new boolean[image.length][image[0].length];
 
-        for (int y = 0; y < image.length; y++) {
-            for (int x = 0; x < image[0].length; x++) {
-                newImage[y][x] = binary(image[y][x], threshold);
+        for (int x = 0; x < image.length; x++) {
+            for (int y = 0; y < image[0].length; y++) {
+                newImage[x][y] = binary(image[x][y], threshold);
             }
         }
 
@@ -172,10 +172,10 @@ public final class Image {
 
         int[][] newImage = new int[image.length][image[0].length];
 
-        for (int y = 0; y < image.length; y++) {
-            for (int x = 0; x < image[0].length; x++) {
-                byte grayPixel = (byte) image[y][x];
-                newImage[y][x] = argb((byte) 0xFF, grayPixel, grayPixel, grayPixel);
+        for (int x = 0; x < image.length; x++) {
+            for (int y = 0; y < image[0].length; y++) {
+                byte grayPixel = (byte) image[x][y];
+                newImage[x][y] = argb((byte) 0xFF, grayPixel, grayPixel, grayPixel);
             }
         }
 
@@ -193,11 +193,11 @@ public final class Image {
 
         int[][] newImage = new int[image.length][image[0].length];
 
-        for (int y = 0; y < image.length; y++) {
-            for (int x = 0; x < image[0].length; x++) {
-                boolean isWhite = image[y][x];
+        for (int x = 0; x < image.length; x++) {
+            for (int y = 0; y < image[0].length; y++) {
+                boolean isWhite = image[x][y];
                 byte blackOrWhite = (byte) (isWhite ? 0xFF : 0);
-                newImage[y][x] = argb((byte) 0xFF, blackOrWhite, blackOrWhite, blackOrWhite);
+                newImage[x][y] = argb((byte) 0xFF, blackOrWhite, blackOrWhite, blackOrWhite);
             }
         }
 

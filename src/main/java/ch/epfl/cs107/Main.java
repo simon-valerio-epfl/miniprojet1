@@ -53,6 +53,8 @@ public final class Main {
         for (int i = 0; i < 8; i++) {
             System.out.println(Bit.toByte(Bit.toBitArray(Bit.toByte(new boolean[]{true, true, true, true, true, true, false, false}))));
         }
+        int[][] cicic = {{1,2}, {1,4}};
+        Image.toGray(cicic);
 
         System.out.println(Text.toString(Text.toBitArray("ci e coucou barilla")));
 
@@ -68,16 +70,15 @@ public final class Main {
 
         // ========== Test Image ==========
         assert testConversionARGBInt();
-        /*
-        //assert testPixelToGray();
-        //assert testGrayToBinary();
-        //assert testImageToGray();
-        //assert testGrayImageToBinary();
-        //assert testImageFromGray();
-        //assert testImageFromBinary();
+        assert testPixelToGray();
+        assert testGrayToBinary();
+        assert testImageToGray();
+        assert testGrayImageToBinary();
+        assert testImageFromGray();
+        assert testImageFromBinary();
         Helper.dialog("Tests ", "Image manipulation passed");
-        //assert testWithRealImage("image-formats");
-        //assert testBinaryWithRealImage("image-formats");
+        assert testWithRealImage("image-formats");
+        assert testBinaryWithRealImage("image-formats");/*
         Helper.dialog("Tests ", "Image manipulation with images from 'image-formats' passed");
         // ========== Test Cryptography Methods ==========
         String message = "La vie est un long fleuve tranquille :-)";
