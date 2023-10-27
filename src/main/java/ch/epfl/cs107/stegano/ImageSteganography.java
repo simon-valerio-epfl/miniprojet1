@@ -35,7 +35,8 @@ public final class ImageSteganography {
      * @return ARGB image with the image embedded on the cover
      */
     public static int[][] embedARGB(int[][] cover, int[][] argbImage, int threshold){
-        return Helper.fail("NOT IMPLEMENTED");
+        int[][] grayImage = toGray(argbImage);
+        return embedGray(cover, grayImage, threshold);
     }
 
     /**
@@ -46,7 +47,8 @@ public final class ImageSteganography {
      * @return ARGB image with the image embedded on the cover
      */
     public static int[][] embedGray(int[][] cover, int[][] grayImage, int threshold){
-        return Helper.fail("NOT IMPLEMENTED");
+        boolean[][] binaryImage = toBinary(grayImage, threshold);
+        return embedBW(cover, binaryImage);
     }
 
     /**
@@ -56,7 +58,25 @@ public final class ImageSteganography {
      * @return ARGB image with the image embedded on the cover
      */
     public static int[][] embedBW(int[][] cover, boolean[][] load){
-        return Helper.fail("NOT IMPLEMENTED");
+        assert cover.length >= load.length && cover[0].length >= load[0].length;
+
+        int[][] newImage = new int[cover.length][cover[0].length];
+
+        // we copy all the pixel in our load
+        // to the new image
+        for (int y = 0; y < cover.length; y++) {
+            for (int x = 0; x < cover[0].length; x++) {
+                int pixelCover = cover[y][x];
+                if (load.length >= y && load[y].length >= x) {
+                    boolean pixelValue = load[y][x];
+                    newImage[y][x] = embedInLSB(pixelCover, pixelValue);
+                } else {
+                    newImage[y][x] = embedInLSB(pixelCover, false);
+                }
+            }
+        }
+
+        return newImage;
     }
 
     // ============================================================================================
@@ -69,7 +89,7 @@ public final class ImageSteganography {
      * @return binary representation of the hidden image
      */
     public static boolean[][] revealBW(int[][] image) {
-        return Helper.fail("NOT IMPLEMENTED");
+
     }
 
 }
