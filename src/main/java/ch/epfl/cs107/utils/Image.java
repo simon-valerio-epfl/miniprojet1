@@ -154,9 +154,9 @@ public final class Image {
     }
 
     public static byte extractPrimaryComponent(int pixel, int componentPos){
-        assert (componentPos<=3 && componentPos>=0);
+        assert (componentPos <= 3 && componentPos >= 0);
         int mask = 255;
-        int shift = Byte.SIZE*componentPos;
+        int shift = Byte.SIZE * componentPos;
         pixel >>= shift;
         pixel &= mask;
         return (byte) pixel;
