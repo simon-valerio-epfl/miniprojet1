@@ -64,14 +64,14 @@ public final class ImageSteganography {
 
         // we copy all the pixel in our load
         // to the new image
-        for (int y = 0; y < cover.length; y++) {
-            for (int x = 0; x < cover[0].length; x++) {
-                int pixelCover = cover[y][x];
-                if (load.length >= y && load[y].length >= x) {
-                    boolean pixelValue = load[y][x];
-                    newImage[y][x] = embedInLSB(pixelCover, pixelValue);
+        for (int x = 0; x < cover.length; x++) {
+            for (int y = 0; y < cover[0].length; y++) {
+                int pixelCover = cover[x][y];
+                if (load.length >= x && load[x].length >= y) {
+                    boolean pixelValue = load[x][y];
+                    newImage[x][y] = embedInLSB(pixelCover, pixelValue);
                 } else {
-                    newImage[y][x] = embedInLSB(pixelCover, false);
+                    newImage[x][y] = embedInLSB(pixelCover, false);
                 }
             }
         }
