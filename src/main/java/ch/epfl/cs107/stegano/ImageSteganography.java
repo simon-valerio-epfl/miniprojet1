@@ -1,6 +1,7 @@
 package ch.epfl.cs107.stegano;
 
 import ch.epfl.cs107.Helper;
+import ch.epfl.cs107.utils.Bit;
 
 import static ch.epfl.cs107.utils.Text.*;
 import static ch.epfl.cs107.utils.Image.*;
@@ -30,7 +31,7 @@ public final class ImageSteganography {
     /**
      * Embed an ARGB image on another ARGB image (the cover)
      * @param cover Cover image
-     * @param image Embedded image
+     * @param argbImage Embedded image
      * @param threshold threshold to use for binary conversion
      * @return ARGB image with the image embedded on the cover
      */
@@ -42,7 +43,7 @@ public final class ImageSteganography {
     /**
      * Embed a Gray scaled image on another ARGB image (the cover)
      * @param cover Cover image
-     * @param image Embedded image
+     * @param grayImage Embedded image
      * @param threshold threshold to use for binary conversion
      * @return ARGB image with the image embedded on the cover
      */
@@ -89,7 +90,13 @@ public final class ImageSteganography {
      * @return binary representation of the hidden image
      */
     public static boolean[][] revealBW(int[][] image) {
-
+        boolean[][] revealedImage = new boolean [image.length][image[0].length];
+        for (int x = 0; x < image.length; x++) {
+            for (int y = 0; y < image[0].length; y++) {
+                revealedImage[x][y] = Bit.getLSB(image[x][y]);
+            }
+        }
+        return revealedImage;
     }
 
 }
