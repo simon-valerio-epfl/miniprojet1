@@ -53,15 +53,18 @@ public final class Main {
             System.out.println(Bit.toByte(Bit.toBitArray(Bit.toByte(new boolean[]{true, true, true, true, true, true, false, false}))));
         }
 
+        System.out.println(Text.toString(Text.toBitArray("ci e coucou barilla")));
+
         // ========== Test Bit ==========
-        //assert testXthBit();
-        //assert testGetLSB();
-        //assert testEmbedInXthBit();
-        //assert testEmbedInLSB();
-        //assert testByteConversion();
+        assert testXthBit();
+        assert testGetLSB();
+        assert testEmbedInXthBit();
+        assert testEmbedInLSB();
+        assert testByteConversion();
         // ========== Test Text ==========
-        //assert testToBitArray();
-        /*Helper.dialog("Tests", "Bit and Text manipulation passed");
+        assert testToBitArray();
+        Helper.dialog("Tests", "Bit and Text manipulation passed");
+        /*
         // ========== Test Image ==========
         //assert testConversionARGBInt();
         //assert testPixelToGray();
@@ -122,6 +125,8 @@ public final class Main {
         int value = -12;
         int computed = Bit.embedInXthBit(value, false, 2);
         int expected = -16;
+        System.out.println(value);
+        System.out.println(expected);
         return computed == expected;
     }
 

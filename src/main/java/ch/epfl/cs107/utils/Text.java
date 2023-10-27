@@ -79,7 +79,34 @@ public final class Text {
      * @return <b>UTF-8 String</b> representation of the bit array
      */
     public static String toString(boolean[] bitArray) {
-        return Helper.fail("NOT IMPLEMENTED");
+        assert bitArray.length > 0;
+
+        int processedBitCount = 0;
+        int processedByteCount = 0;
+
+        int padding = bitArray.length % Byte.SIZE == 0 ? 0 : 1;
+        int byteCount = bitArray.length / Byte.SIZE + padding;
+
+        // this will store all the final bytes in the string
+        byte[] strBytes = new byte[byteCount];
+
+        // while we have bits to process
+        while (bitArray.length > processedBitCount) {
+
+            // create an array that will store all the bits related to our current byte
+            int bitsToProcessCount = Math.min(Byte.SIZE, bitArray.length - processedBitCount);
+            boolean[] byteBitArray = new boolean[bitsToProcessCount];
+            for (int i = 0; i < bitsToProcessCount; i++) {
+                byteBitArray[i] = bitArray[i + processedBitCount];
+            }
+
+            // we now have made an array of max 8 bits that we can transform into a byte
+            strBytes[processedByteCount] = Bit.toByte(byteBitArray);
+            processedByteCount++;
+            processedBitCount += bitsToProcessCount;
+        }
+        String outputText = Text.toString(strBytes);
+        return outputText;
     }
 
 }
