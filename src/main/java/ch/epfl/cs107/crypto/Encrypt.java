@@ -2,6 +2,8 @@ package ch.epfl.cs107.crypto;
 
 import ch.epfl.cs107.Helper;
 
+import java.util.Random;
+
 import static ch.epfl.cs107.utils.Text.*;
 import static ch.epfl.cs107.utils.Image.*;
 import static ch.epfl.cs107.utils.Bit.*;
@@ -36,7 +38,13 @@ public final class Encrypt {
      * @return an encoded byte array
      */
     public static byte[] caesar(byte[] plainText, byte key) {
-        return Helper.fail("NOT IMPLEMENTED");
+        assert plainText!=null;
+        byte[] caesarText = new byte[plainText.length];
+        for (int i = 0; i < plainText.length; i++) {
+            caesarText[i] = (byte) (plainText[i] + key);
+        }
+        return caesarText;
+
     }
 
     // ============================================================================================
@@ -52,7 +60,12 @@ public final class Encrypt {
      * @return an encoded byte array
      */
     public static byte[] vigenere(byte[] plainText, byte[] keyword) {
-        return Helper.fail("NOT IMPLEMENTED");
+        assert (plainText!=null && keyword!=null);
+        byte[] vigenereText = new byte[plainText.length];
+        for (int i = 0; i < plainText.length; i++) {
+            vigenereText[i] = (byte) (plainText[i] + keyword[i]);
+        }
+        return vigenereText;
     }
 
     // ============================================================================================
@@ -66,7 +79,20 @@ public final class Encrypt {
      * @return an encoded byte array
      */
     public static byte[] cbc(byte[] plainText, byte[] iv) {
-        return Helper.fail("NOT IMPLEMENTED");
+        assert (plainText!=null && iv!=null);
+        byte[] cbcText = new byte[plainText.length];
+        final int SIZE = iv.length;
+        int byteCounter;
+        int blockCounter =0;
+        do {
+            byteCounter = blockCounter*SIZE;
+            for (int i = 0; i < SIZE && (i < plainText.length-byteCounter); i++) {
+                cbcText[i + byteCounter] = (byte) (plainText[i + byteCounter] ^ iv[i]);
+                iv[i] = cbcText[i + byteCounter];
+            }
+            blockCounter++;
+        }while (byteCounter < plainText.length);
+        return cbcText;
     }
 
     // ============================================================================================
@@ -80,7 +106,12 @@ public final class Encrypt {
      * @return an encoded byte array
      */
     public static byte[] xor(byte[] plainText, byte key) {
-        return Helper.fail("NOT IMPLEMENTED");
+        assert  (plainText!=null);
+        byte[] xorText = new byte[plainText.length];
+        for (int i = 0; i < plainText.length; i++) {
+            xorText[i] = (byte) (plainText[i] ^ key);
+        }
+        return xorText;
     }
 
     // ============================================================================================
@@ -95,7 +126,13 @@ public final class Encrypt {
      * @return an encoded byte array
      */
     public static byte[] oneTimePad(byte[] plainText, byte[] pad) {
-        return Helper.fail("NOT IMPLEMENTED");
+        assert (plainText!= null && pad.length>=plainText.length);
+        byte[] oneTimeText = new byte[plainText.length];
+        for (int i = 0; i < plainText.length; i++) {
+            oneTimeText[i] = (byte) (plainText[i] ^ pad[i]);
+        }
+        return oneTimeText;
+
     }
 
     /**
@@ -105,7 +142,12 @@ public final class Encrypt {
      * @param result Array containing the result after the execution
      */
     public static void oneTimePad(byte[] plainText, byte[] pad, byte[] result) {
-        Helper.fail("NOT IMPLEMENTED");
+        assert (plainText!=null && pad.length >= plainText.length);
+        Random randomGenerator = new Random(2l);
+        randomGenerator.nextBytes(pad);
+        result = oneTimePad(plainText, pad);
+
+
     }
 
 }

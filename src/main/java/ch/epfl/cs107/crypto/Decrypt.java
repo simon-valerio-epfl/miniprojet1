@@ -35,7 +35,13 @@ public final class Decrypt {
      * @return decoded message
      */
     public static byte[] caesar(byte[] cipher, byte key) {
-        return Helper.fail("NOT IMPLEMENTED");
+        assert cipher!=null;
+        byte[] plainText = new byte[cipher.length];
+        for (int i = 0; i < cipher.length; i++) {
+            plainText[i] = (byte) (cipher[i] - key);
+        }
+        return plainText;
+        //aussi Encrypt.caesar(plainText, -key);
     }
 
     // ============================================================================================
@@ -49,7 +55,12 @@ public final class Decrypt {
      * @return decoded message
      */
     public static byte[] vigenere(byte[] cipher, byte[] keyword) {
-        return Helper.fail("NOT IMPLEMENTED");
+        assert (cipher!=null && keyword!=null);
+        byte[] plainText = new byte[cipher.length];
+        for (int i = 0; i < cipher.length; i++) {
+            plainText[i] = (byte) (cipher[i] + keyword[i]);
+        }
+        return plainText;
     }
 
     // ============================================================================================
@@ -63,7 +74,8 @@ public final class Decrypt {
      * @return decoded message
      */
     public static byte[] cbc(byte[] cipher, byte[] iv) {
-        return Helper.fail("NOT IMPLEMENTED");
+        //A FAIRE
+        return cipher;
     }
 
     // ============================================================================================
@@ -77,7 +89,7 @@ public final class Decrypt {
      * @return decoded message
      */
     public static byte[] xor(byte[] cipher, byte key) {
-        return Helper.fail("NOT IMPLEMENTED");
+        return Encrypt.xor(cipher, key);
     }
 
     // ============================================================================================
@@ -91,7 +103,7 @@ public final class Decrypt {
      * @return decoded message
      */
     public static byte[] oneTimePad(byte[] cipher, byte[] pad) {
-        return Helper.fail("NOT IMPLEMENTED");
+        return Encrypt.oneTimePad(cipher, pad);
     }
 
 }
