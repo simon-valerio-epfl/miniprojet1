@@ -63,7 +63,8 @@ public final class Encrypt {
         assert (plainText!=null && keyword!=null);
         byte[] vigenereText = new byte[plainText.length];
         for (int i = 0; i < plainText.length; i++) {
-            vigenereText[i] = (byte) (plainText[i] + keyword[i]);
+            byte keywordElement = keyword[(i % keyword.length)];
+            vigenereText[i] = (byte) (plainText[i] + keywordElement);
         }
         return vigenereText;
     }
@@ -143,7 +144,7 @@ public final class Encrypt {
      */
     public static void oneTimePad(byte[] plainText, byte[] pad, byte[] result) {
         assert (plainText!=null && pad.length >= plainText.length);
-        Random randomGenerator = new Random(2l);
+        Random randomGenerator = new Random(2L);
         randomGenerator.nextBytes(pad);
         result = oneTimePad(plainText, pad);
 

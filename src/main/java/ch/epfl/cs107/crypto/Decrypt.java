@@ -58,7 +58,8 @@ public final class Decrypt {
         assert (cipher!=null && keyword!=null);
         byte[] plainText = new byte[cipher.length];
         for (int i = 0; i < cipher.length; i++) {
-            plainText[i] = (byte) (cipher[i] + keyword[i]);
+            byte keywordElement = keyword[(i % keyword.length)];
+            plainText[i] = (byte) (cipher[i] - keywordElement);
         }
         return plainText;
     }
