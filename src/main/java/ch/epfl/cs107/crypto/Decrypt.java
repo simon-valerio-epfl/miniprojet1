@@ -35,13 +35,8 @@ public final class Decrypt {
      * @return decoded message
      */
     public static byte[] caesar(byte[] cipher, byte key) {
-        assert cipher!=null;
-        byte[] plainText = new byte[cipher.length];
-        for (int i = 0; i < cipher.length; i++) {
-            plainText[i] = (byte) (cipher[i] - key);
-        }
-        return plainText;
-        //aussi Encrypt.caesar(plainText, -key);
+        assert (cipher != null);
+        return Encrypt.caesar(cipher, (byte) -key);
     }
 
     // ============================================================================================
@@ -55,13 +50,12 @@ public final class Decrypt {
      * @return decoded message
      */
     public static byte[] vigenere(byte[] cipher, byte[] keyword) {
-        assert (cipher!=null && keyword!=null);
-        byte[] plainText = new byte[cipher.length];
-        for (int i = 0; i < cipher.length; i++) {
-            byte keywordElement = keyword[(i % keyword.length)];
-            plainText[i] = (byte) (cipher[i] - keywordElement);
+        assert (cipher != null && keyword != null);
+        byte[] reversedKeyword = new byte[keyword.length];
+        for (int i = 0; i < keyword.length; i++) {
+            reversedKeyword[i] = (byte) -keyword[i];
         }
-        return plainText;
+        return Encrypt.vigenere(cipher, reversedKeyword);
     }
 
     // ============================================================================================
