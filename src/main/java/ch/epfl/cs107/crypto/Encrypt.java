@@ -94,7 +94,10 @@ public final class Encrypt {
 
         for (int i = 0; i < plainText.length; i += iv.length) {
             // we take the corresponding text
-            byte[] textPart = Arrays.copyOfRange(plainText, i, Math.min(plainText.length, i + iv.length));
+            // 0 à 5 exclus
+            // 5 à 10 exclus
+            // 10 à 13 (inclus)
+            byte[] textPart = Arrays.copyOfRange(plainText, i, Math.min(plainText.length, i + iv.length + 1));
             // we encrypt it and save the result as the next pad
             lastPad = oneTimePad(textPart, lastPad);
             // then we add the ciphered text to the final res
