@@ -84,7 +84,9 @@ public final class Encrypt {
      */
     public static byte[] cbc(byte[] plainText, byte[] iv) {
         assert plainText != null;
-        assert plainText.length != 0;
+        if (plainText.length == 0) {
+            return plainText;
+        }
         assert iv !=null;
         assert iv.length != 0;
 

@@ -74,7 +74,9 @@ public final class Decrypt {
      */
     public static byte[] cbc(byte[] cipher, byte[] iv) {
         assert cipher != null;
-        assert cipher.length != 0;
+        if (cipher.length == 0) {
+            return cipher;
+        }
         assert iv !=null;
         assert iv.length != 0;
         final int PADSIZE = iv.length;
