@@ -36,6 +36,8 @@ public class TextSteganography {
      * @return ARGB image with the message embedded
      */
     public static int[][] embedBitArray(int[][] cover, boolean[] message) {
+
+
         int[][] newImage = new int[cover.length][cover[0].length];
 
         for (int x = 0; x < cover.length; x++) {
@@ -110,7 +112,7 @@ public class TextSteganography {
      * @return extracted message
      */
     public static byte[] revealText(int[][] image) {
-        return Text.toStringBytes(revealBitArray(image));
+        return Text.toBytes(revealBitArray(image));
     }
 
     public static void revealChallengeText(int[][] image) {
