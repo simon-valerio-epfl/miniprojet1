@@ -70,10 +70,7 @@ public final class Decrypt {
      * @param iv the pad of size BLOCKSIZE we use to start the chain encoding
      * @return decoded message
      */
-    public static byte[] cbc(byte[] cipher, byte[] iv) {
-        assert (cipher!=null && iv!=null);
-        return Encrypt.cbc(cipher, iv);
-    }
+    public static byte[] cbc(byte[] cipher, byte[] iv) { return Encrypt.cbc(cipher, iv); }
 
     // ============================================================================================
     // =================================== XOR'S ENCRYPTION =======================================
