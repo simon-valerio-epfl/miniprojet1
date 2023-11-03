@@ -91,9 +91,9 @@ public final class Text {
         int charCount = bitArray.length / Byte.SIZE;
         byte[] strBytes = new byte[charCount];
         for (int i = 0; i < charCount; i++){
-            for (int j = 0; j < 8; j++) {
-                if (bitArray[i * 8 + j]) {
-                    strBytes[i] |= (byte) (1 << (7 - j));
+            for (int j = 0; j < Byte.SIZE; j++) {
+                if (bitArray[i * Byte.SIZE + j]) {
+                    strBytes[i] |= (byte) (1 << (Byte.SIZE - (j+1)));
                 }
             }
         }

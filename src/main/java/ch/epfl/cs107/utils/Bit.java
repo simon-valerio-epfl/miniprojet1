@@ -144,41 +144,4 @@ public final class Bit {
         }
         return myByte;
     }
-
-    /*
-     * Converts an array of booleans to an array of bytes
-     *
-     * @param bitArray bit array representation to convert
-     * @return the array of bytes
-     */
-    /*
-    public static byte[] toBytes (boolean[] bitArray) {
-        assert bitArray!=null;
-        assert bitArray.length != 0;
-        int processedBitCount = 0;
-        int padding = bitArray.length % Byte.SIZE == 0 ? 0 : 1;
-        int byteCount = bitArray.length / Byte.SIZE + padding;
-
-        // this will store all the final bytes in the string
-        byte[] strBytes = new byte[byteCount];
-
-        // while we have bits to process
-        for (int i = 0; i < byteCount; i++) {
-
-            // create an array that will store all the bits related to our current byte
-            int bitsToProcessCount = Math.min(Byte.SIZE, bitArray.length - processedBitCount);
-            boolean[] byteBitArray = new boolean[bitsToProcessCount];
-            for (int j = 0; j < bitsToProcessCount; j++) {
-                byteBitArray[j] = bitArray[j + processedBitCount];
-            }
-
-            // we now have made an array of max 8 bits that we can transform into a byte
-            strBytes[i] = Bit.toByte(byteBitArray);
-            processedBitCount += bitsToProcessCount;
-
-        }
-
-        return strBytes;
-    }*/
-
 }
