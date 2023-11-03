@@ -83,7 +83,7 @@ public final class Encrypt {
      * @return an encoded byte array
      */
     public static byte[] cbc(byte[] plainText, byte[] iv) {
-        assert (plainText!=null && iv!=null);
+        assert (plainText.length != 0 && iv.length != 0);
 
         final byte[] cipherText = new byte[plainText.length];
 

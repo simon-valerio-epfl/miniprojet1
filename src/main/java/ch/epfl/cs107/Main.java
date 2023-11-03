@@ -87,11 +87,11 @@ public final class Main {
         message = Text.toString(Helper.read("text_one.txt"));
         testCrypto(message, key);
         Helper.dialog("Tests ", "Cryptography passed");
-        /*// ========== Test Steganography Methods ==========
-        //assert testEmbedBWImage();
-        //assert testEmbedText();
-        //assert testImageSteganographyWithImages("the-starry-night");
-        Helper.dialog("Tests ", "ImageSteganography passed");*/
+        // ========== Test Steganography Methods ==========
+        assert testEmbedBWImage();
+        assert testEmbedText();
+        assert testImageSteganographyWithImages("the-starry-night");
+        Helper.dialog("Tests ", "ImageSteganography passed");
     }
 
     // ============================================================================================
