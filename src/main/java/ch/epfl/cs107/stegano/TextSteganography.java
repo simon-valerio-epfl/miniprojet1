@@ -62,6 +62,7 @@ public class TextSteganography {
      */
     public static boolean[] revealBitArray(int[][] image) {
         assert image != null;
+        assert image.length != 0;
         assert image[0] != null;
         assert image[0].length!=0;
         for (int i = 1; i < image.length; i++) {
@@ -97,9 +98,10 @@ public class TextSteganography {
     public static int[][] embedText(int[][] cover, byte[] message) {
         assert cover!=null;
         assert message!=null;
-        for (int i = 1; i < cover.length; i++) {
+        for (int i = 0; i < cover.length; i++) {
             assert cover[i] != null;
             assert cover[i].length > 0;
+            assert cover[i].length == cover[0].length;
         }
         return embedBitArray(cover, Text.toBitArray( // from string to boolean[]
                 Text.toString(message) // from byte[] to string
