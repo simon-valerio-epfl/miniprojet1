@@ -64,7 +64,7 @@ public final class ImageSteganography {
         assert load!=null;
         assert load.length!=0;
         assert cover.length >= load.length;
-        for (int i = 0; i < cover.length; i++) {
+        for (int i = 0; i < load.length; i++) {
             assert load[i] !=null;
             assert cover[i] != null;
             assert load[i].length != 0;
@@ -77,11 +77,11 @@ public final class ImageSteganography {
         for (int x = 0; x < cover.length; x++) {
             for (int y = 0; y < cover[0].length; y++) {
                 int pixelCover = cover[x][y];
-                if (load.length >= x && load[x].length >= y) {
+                if (load.length > x && load[x].length > y) {
                     boolean pixelValue = load[x][y];
                     newImage[x][y] = embedInLSB(pixelCover, pixelValue);
                 } else {
-                    newImage[x][y] = embedInLSB(pixelCover, false);
+                    newImage[x][y] = pixelCover;
                 }
             }
         }
