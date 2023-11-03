@@ -38,7 +38,9 @@ public final class Bit {
      * @return embedded value
      */
     public static int embedInXthBit(int value, boolean m, int pos) {
-        assert value !=0 && pos >=0 && pos<=Integer.SIZE ;
+        assert value != 0;
+        assert pos >= 0;
+        assert pos <= Integer.SIZE;
         int mask = 1 << pos;
         int reversedMask = ~mask;
         int newValue;
