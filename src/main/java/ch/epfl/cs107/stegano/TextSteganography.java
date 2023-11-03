@@ -2,6 +2,7 @@ package ch.epfl.cs107.stegano;
 
 import ch.epfl.cs107.Helper;
 import ch.epfl.cs107.crypto.Decrypt;
+import ch.epfl.cs107.utils.Bit;
 import ch.epfl.cs107.utils.Text;
 
 import static ch.epfl.cs107.utils.Text.*;
@@ -114,9 +115,12 @@ public class TextSteganography {
             assert cover[i].length > 0;
             assert cover[i].length == cover[0].length;
         }
-        return embedBitArray(cover, Text.toBitArray( // from string to boolean[]
-                Text.toString(message) // from byte[] to string
-        ));
+        boolean[] messageBool = new boolean[Byte.SIZE * message.length];
+        for (int i = 0; i < message.length; i++) {
+            boolean[] byteBool = Bit.toBitArray(message[i]);
+            System.arraycopy(byteBool, 0, messageBool, i*Byte.SIZE, byteBool.length);
+        }
+        return embedBitArray(cover, messageBool);
     }
 
     /**
