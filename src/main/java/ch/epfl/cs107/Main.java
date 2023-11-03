@@ -92,6 +92,8 @@ public final class Main {
         assert testEmbedText();
         assert testImageSteganographyWithImages("the-starry-night");
         Helper.dialog("Tests ", "ImageSteganography passed");
+
+        resolveChallenge();
     }
 
     // ============================================================================================
@@ -356,10 +358,37 @@ public final class Main {
         return Arrays.deepEquals(EXPECTED_IMAGE, hidden) && Arrays.deepEquals(cover, new int[10][10]);
     }
 
+    public static void resolveChallenge() {
+        var hint2 = Helper.read("challenge" + File.separator + "hint2.txt");
+        System.out.println(Text.toString(Decrypt.xor(hint2, Text.toBytes("a")[0])));
+        var image = Helper.readImage("challenge" + File.separator + "image.png");
+
+        var cover = Helper.readImage("the-starry-night" + File.separator + "cover.png");
+        var newImage = TextSteganography.embedText(cover, Text.toBytes("coucou la populatione ;) ça va ?"));
+        Helper.writeImage("the-starry-night" + File.separator + "editedahah.png", newImage);
+
+        var newContent = Helper.readImage("the-starry-night" + File.separator + "editedahah.png");
+        System.out.println(Text.toString(TextSteganography.revealText(newContent)));
+
+        var key = Text.toBytes("adele");
+        System.out.println(
+                Text.toString(Decrypt.vigenere(Encrypt.vigenere(Text.toBytes("VIG coucou la popppp:dljdohicv$$"), key), key))
+        );
+
+        System.out.println(
+                Text.toString(Decrypt.cbc(Encrypt.cbc(Text.toBytes("CBD coucou la popppp:dljdohicv$$"), key), key))
+        );
+
+        TextSteganography.revealText(image);
+    }
+
     private static boolean testImageSteganographyWithImages(String path){
         var image  = Helper.readImage(path + File.separator + "image.png");
         var cover  = Helper.readImage(path + File.separator + "cover.png");
         var hidden = Helper.readImage(path + File.separator + "hidden.png");
+
+        Helper.writeImage(path + File.separator + "lanotre.png", ImageSteganography.embedARGB(cover, image, IMAGE_THRESHOLD));
+
         return Arrays.deepEquals(ImageSteganography.embedARGB(cover, image, IMAGE_THRESHOLD), hidden);
     }
 
