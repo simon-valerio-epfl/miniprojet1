@@ -80,12 +80,12 @@ public final class Decrypt {
         final int PADSIZE = iv.length;
         byte[] plainText = new byte[cipher.length];
         for (int i = 0; i < PADSIZE; i++) {
-            cipher[i] ^= iv[i];
+            plainText[i] = (byte) (cipher[i] ^ iv[i]);
         }
         for (int i = PADSIZE; i < cipher.length; i++) {
-            cipher[i] ^= cipher[i- PADSIZE];
+            plainText[i] = (byte) (plainText[i- PADSIZE]^ cipher[i]);
         }
-        return cipher;
+        return plainText;
     }
 
     // ============================================================================================
