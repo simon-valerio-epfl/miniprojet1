@@ -137,6 +137,8 @@ public final class Image {
             assert (ints != null);
         }
 
+        // handle empty image
+        if (image.length == 0) return new int[0][0];
 
         int[][] newImage = new int[image.length][image[0].length];
 
@@ -161,6 +163,9 @@ public final class Image {
         for (int[] ints : image) {
             assert (ints != null);
         }
+
+        // handle empty image
+        if (image.length == 0) return new boolean[0][0];
         boolean[][] newImage = new boolean[image.length][image[0].length];
 
         for (int x = 0; x < image.length; x++) {
@@ -183,6 +188,9 @@ public final class Image {
         for (int[] ints : image) {
             assert (ints != null);
         }
+
+        // handle empty image
+        if (image.length == 0) return new int[0][0];
 
         int[][] newImage = new int[image.length][image[0].length];
 
@@ -207,6 +215,9 @@ public final class Image {
         for (boolean[] bools : image) {
             assert (bools != null);
         }
+
+        // handle empty image
+        if (image.length == 0) return new int[0][0];
 
         int[][] newImage = new int[image.length][image[0].length];
 
