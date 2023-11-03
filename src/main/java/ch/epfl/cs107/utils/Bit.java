@@ -59,7 +59,6 @@ public final class Bit {
      * @return embedded value
      */
     public static int embedInLSB(int value, boolean m){
-        assert value!=0;
         int LSBPosition = 0;
         return embedInXthBit(value, m, LSBPosition);
     }
