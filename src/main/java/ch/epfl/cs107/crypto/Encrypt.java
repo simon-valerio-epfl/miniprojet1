@@ -88,23 +88,16 @@ public final class Encrypt {
         assert iv !=null;
         assert iv.length != 0;
 
-        final byte[] cipherText = new byte[plainText.length];
-
-        byte[] lastPad = iv;
-
-        for (int i = 0; i < plainText.length; i += iv.length) {
-            // we take the corresponding text
-            // 0 à 5 exclus
-            // 5 à 10 exclus
-            // 10 à 13 (inclus)
-            byte[] textPart = Arrays.copyOfRange(plainText, i, Math.min(plainText.length, i + iv.length + 1));
-            // we encrypt it and save the result as the next pad
-            lastPad = oneTimePad(textPart, lastPad);
-            // then we add the ciphered text to the final res
-            System.arraycopy(lastPad, 0, cipherText, i, lastPad.length);
+        // encrypt first characters of plain text with iv
+        for (int i = 0; i < iv.length; i++) {
+            plainText[i] ^= iv[i];
         }
 
-        return cipherText;
+        for (int i = iv.length; i < plainText.length; i++) {
+            plainText[i] ^= plainText[i-iv.length];
+        }
+
+        return plainText;
     }
 
     // ============================================================================================

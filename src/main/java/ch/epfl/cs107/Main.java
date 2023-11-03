@@ -88,6 +88,7 @@ public final class Main {
         testCrypto(message, key);
         Helper.dialog("Tests ", "Cryptography passed");
         // ========== Test Steganography Methods ==========
+        testTextSteg();
         assert testEmbedBWImage();
         assert testEmbedText();
         assert testImageSteganographyWithImages("the-starry-night");
@@ -358,28 +359,22 @@ public final class Main {
         return Arrays.deepEquals(EXPECTED_IMAGE, hidden) && Arrays.deepEquals(cover, new int[10][10]);
     }
 
+    public static void testTextSteg () {
+        var image  = Helper.readImage("the-starry-night" + File.separator + "image.png");
+        var embeddedImage = TextSteganography.embedText(image, Text.toBytes("coucou je suis caché"));
+        Helper.writeImage("the-starry-night" + File.separator + "test.png", embeddedImage);
+        var writtenImage = Helper.readImage("the-starry-night" + File.separator + "test.png");
+        var gotText = Text.toString(TextSteganography.revealText(writtenImage));
+        System.out.println("got text: "+gotText);
+    }
+
     public static void resolveChallenge() {
+        /*
         var hint2 = Helper.read("challenge" + File.separator + "hint2.txt");
         System.out.println(Text.toString(Decrypt.xor(hint2, Text.toBytes("a")[0])));
         var image = Helper.readImage("challenge" + File.separator + "image.png");
-
-        var cover = Helper.readImage("the-starry-night" + File.separator + "cover.png");
-        var newImage = TextSteganography.embedText(cover, Text.toBytes("coucou la populatione ;) ça va ?"));
-        Helper.writeImage("the-starry-night" + File.separator + "editedahah.png", newImage);
-
-        var newContent = Helper.readImage("the-starry-night" + File.separator + "editedahah.png");
-        System.out.println(Text.toString(TextSteganography.revealText(newContent)));
-
         var key = Text.toBytes("adele");
-        System.out.println(
-                Text.toString(Decrypt.vigenere(Encrypt.vigenere(Text.toBytes("VIG coucou la popppp:dljdohicv$$"), key), key))
-        );
-
-        System.out.println(
-                Text.toString(Decrypt.cbc(Encrypt.cbc(Text.toBytes("CBD coucou la popppp:dljdohicv$$"), key), key))
-        );
-
-        TextSteganography.revealText(image);
+        TextSteganography.revealText(image);*/
     }
 
     private static boolean testImageSteganographyWithImages(String path){
