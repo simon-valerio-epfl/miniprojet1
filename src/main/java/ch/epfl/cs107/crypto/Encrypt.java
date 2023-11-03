@@ -60,7 +60,9 @@ public final class Encrypt {
      * @return an encoded byte array
      */
     public static byte[] vigenere(byte[] plainText, byte[] keyword) {
-        assert (plainText!=null && keyword!=null);
+        assert plainText!=null;
+        assert keyword!=null;
+        assert keyword.length!=0;
         byte[] vigenereText = new byte[plainText.length];
         for (int i = 0; i < plainText.length; i++) {
             vigenereText[i] = (byte) (plainText[i] + keyword[i]);
@@ -126,7 +128,9 @@ public final class Encrypt {
      * @return an encoded byte array
      */
     public static byte[] oneTimePad(byte[] plainText, byte[] pad) {
-        assert (plainText!= null && pad.length>=plainText.length);
+        assert plainText!= null;
+        assert pad!=null;
+        assert pad.length==plainText.length;
         byte[] oneTimeText = new byte[plainText.length];
         for (int i = 0; i < plainText.length; i++) {
             oneTimeText[i] = (byte) (plainText[i] ^ pad[i]);

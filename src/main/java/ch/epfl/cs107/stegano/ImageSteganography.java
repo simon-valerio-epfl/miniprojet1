@@ -48,6 +48,7 @@ public final class ImageSteganography {
      * @return ARGB image with the image embedded on the cover
      */
     public static int[][] embedGray(int[][] cover, int[][] grayImage, int threshold){
+        assert grayImage !=null;
         boolean[][] binaryImage = toBinary(grayImage, threshold);
         return embedBW(cover, binaryImage);
     }
@@ -59,10 +60,18 @@ public final class ImageSteganography {
      * @return ARGB image with the image embedded on the cover
      */
     public static int[][] embedBW(int[][] cover, boolean[][] load){
-        assert cover.length >= load.length && cover[0].length >= load[0].length;
+        assert cover!=null;
+        assert load!=null;
+        assert load.length!=0;
+        assert cover.length >= load.length;
+        for (int i = 0; i < cover.length; i++) {
+            assert load[i] !=null;
+            assert cover[i] != null;
+            assert load[i].length != 0;
+            assert cover[i].length >=load[i].length;
+        }
 
         int[][] newImage = new int[cover.length][cover[0].length];
-
         // we copy all the pixel in our load
         // to the new image
         for (int x = 0; x < cover.length; x++) {

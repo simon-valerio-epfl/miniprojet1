@@ -55,7 +55,9 @@ public final class Decrypt {
      * @return decoded message
      */
     public static byte[] vigenere(byte[] cipher, byte[] keyword) {
-        assert (cipher!=null && keyword!=null);
+        assert cipher!=null;
+        assert keyword!=null;
+        assert keyword.length!=0;
         byte[] plainText = new byte[cipher.length];
         for (int i = 0; i < cipher.length; i++) {
             plainText[i] = (byte) (cipher[i] + keyword[i]);
@@ -74,7 +76,7 @@ public final class Decrypt {
      * @return decoded message
      */
     public static byte[] cbc(byte[] cipher, byte[] iv) {
-        //A FAIRE
+        assert (cipher!=null);
         return cipher;
     }
 

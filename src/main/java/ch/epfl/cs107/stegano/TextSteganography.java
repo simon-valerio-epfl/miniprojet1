@@ -58,6 +58,13 @@ public class TextSteganography {
      * @return extracted message
      */
     public static boolean[] revealBitArray(int[][] image) {
+        assert image != null;
+        assert image[0] != null;
+        assert image[0].length!=0;
+        for (int i = 1; i < image.length; i++) {
+            assert image[i] != null;
+            assert image[i].length == image[0].length;
+        }
         boolean[] revealedText = new boolean[image.length * image[0].length];
 
         for (int x = 0; x < image.length; x++) {
@@ -85,6 +92,12 @@ public class TextSteganography {
      * @return ARGB image with the message embedded
      */
     public static int[][] embedText(int[][] cover, byte[] message) {
+        assert cover!=null;
+        assert message!=null;
+        for (int i = 1; i < cover.length; i++) {
+            assert cover[i] != null;
+            assert cover[i].length > 0;
+        }
         return embedBitArray(cover, Text.toBitArray( // from string to boolean[]
                 Text.toString(message) // from byte[] to string
         ));

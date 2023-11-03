@@ -126,7 +126,11 @@ public final class Image {
      * @return the gray scale version of the image
      */
     public static int[][] toGray(int[][] image){
-        assert image.length > 0;
+        assert image != null;
+        for (int[] ints : image) {
+            assert (ints != null);
+        }
+
 
         int[][] newImage = new int[image.length][image[0].length];
 
@@ -147,7 +151,10 @@ public final class Image {
      * @return binary representation of the image
      */
     public static boolean[][] toBinary(int[][] image, int threshold){
-        assert image.length > 0;
+        assert image != null;
+        for (int[] ints : image) {
+            assert (ints != null);
+        }
         boolean[][] newImage = new boolean[image.length][image[0].length];
 
         for (int x = 0; x < image.length; x++) {
@@ -166,7 +173,10 @@ public final class Image {
      * @return <b>gray ARGB</b> representation
      */
     public static int[][] fromGray(int[][] image){
-        assert image.length > 0;
+        assert image != null;
+        for (int[] ints : image) {
+            assert (ints != null);
+        }
 
         int[][] newImage = new int[image.length][image[0].length];
 
@@ -187,7 +197,10 @@ public final class Image {
      * @return <b>black and white ARGB</b> representation
      */
     public static int[][] fromBinary(boolean[][] image){
-        assert image.length > 0 && image[0].length >0;
+        assert image !=null;
+        for (boolean[] bools : image) {
+            assert (bools != null);
+        }
 
         int[][] newImage = new int[image.length][image[0].length];
 

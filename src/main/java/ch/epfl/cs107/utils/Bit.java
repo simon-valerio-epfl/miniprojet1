@@ -38,7 +38,9 @@ public final class Bit {
      * @return embedded value
      */
     public static int embedInXthBit(int value, boolean m, int pos) {
-        assert value !=0 && pos >=0 && pos<=Integer.SIZE ;
+        assert value !=0;
+        assert  pos >=0;
+        assert pos<=Integer.SIZE ;
         int mask = 1 << pos;
         int reversedMask = ~mask;
         int newValue;
@@ -57,6 +59,7 @@ public final class Bit {
      * @return embedded value
      */
     public static int embedInLSB(int value, boolean m){
+        assert value!=0;
         int LSBPosition = 0;
         return embedInXthBit(value, m, LSBPosition);
     }
@@ -69,7 +72,8 @@ public final class Bit {
      * @return <code>true</code> if the bit is '1' and <code>false</code> otherwise
      */
     public static boolean getXthBit(int value, int pos) {
-        assert (pos <= Integer.SIZE && pos>=0);
+        assert pos <= Integer.SIZE;
+        assert pos>=0;
         int mask = 1 << pos;
         return (value & mask) != 0;
     }
@@ -81,6 +85,7 @@ public final class Bit {
      * @return <code>true</code> if the bit is '1' and <code>false</code> otherwise
      */
     public static boolean getLSB(int value) {
+        assert value!=0;
         int LSBPosition = 0;
         return getXthBit(value, LSBPosition);
     }
@@ -130,7 +135,7 @@ public final class Bit {
      * @return the byte representation of the bit array
      */
     public static byte toByte(boolean[] bitArray){
-        assert (bitArray.length != 0);
+        assert bitArray.length != 0;
         byte myByte = 0;
         for(boolean bit: bitArray){
             myByte <<= 1;
@@ -148,6 +153,9 @@ public final class Bit {
      * @return the array of bytes
      */
     public static byte[] toBytes (boolean[] bitArray) {
+        // A CONTROLER
+        assert bitArray!=null;
+        assert bitArray.length==8;
         int processedBitCount = 0;
         int padding = bitArray.length % Byte.SIZE == 0 ? 0 : 1;
         int byteCount = bitArray.length / Byte.SIZE + padding;

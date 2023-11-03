@@ -36,6 +36,7 @@ public final class Text {
      * @return bytes representation of the String in the <b>UTF-8</b> format
      */
     public static byte[] toBytes(String str){
+        assert !str.isEmpty();
         return str.getBytes(StandardCharsets.UTF_8);
     }
 
@@ -46,7 +47,7 @@ public final class Text {
      * @return <b>UTF-8</b> representation of the string in the <b>bit array</b> format
      */
     public static boolean[] toBitArray(String str){
-        assert !str.isEmpty();
+        assert str!=null;
         // first we convert our string to bytes
         byte[] strBytes = toBytes(str);
         // here, we will store our bits
@@ -71,6 +72,7 @@ public final class Text {
      * @return String representation using the {@link String} type
      */
     public static String toString(byte[] bytes) {
+        assert bytes!=null;
         return new String(bytes, StandardCharsets.UTF_8);
     }
 
@@ -80,7 +82,7 @@ public final class Text {
      * @return <b>UTF-8 String</b> representation of the bit array
      */
     public static String toString(boolean[] bitArray) {
-        assert bitArray.length > 0;
+        assert bitArray  !=null;
         byte[] strBytes = Bit.toBytes(bitArray);
         return Text.toString(strBytes);
     }
