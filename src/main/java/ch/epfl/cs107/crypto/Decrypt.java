@@ -72,7 +72,21 @@ public final class Decrypt {
      * @param iv the pad of size BLOCKSIZE we use to start the chain encoding
      * @return decoded message
      */
-    public static byte[] cbc(byte[] cipher, byte[] iv) { return Encrypt.cbc(cipher, iv); }
+    public static byte[] cbc(byte[] cipher, byte[] iv) {
+        assert cipher != null;
+        assert cipher.length != 0;
+        assert iv !=null;
+        assert iv.length != 0;
+        final int PADSIZE = iv.length;
+        byte[] plainText = new byte[cipher.length];
+        for (int i = 0; i < PADSIZE; i++) {
+            cipher[i] ^= iv[i];
+        }
+        for (int i = PADSIZE; i < cipher.length; i++) {
+            cipher[i] ^= cipher[i- PADSIZE];
+        }
+        return cipher;
+    }
 
     // ============================================================================================
     // =================================== XOR'S ENCRYPTION =======================================
