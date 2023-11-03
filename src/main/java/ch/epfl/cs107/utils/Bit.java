@@ -134,7 +134,6 @@ public final class Bit {
      */
     public static byte toByte(boolean[] bitArray){
         assert bitArray != null;
-        // todo demander à fabrice si on doit vérifier ET que non nul ET que length == 8
         assert bitArray.length == Byte.SIZE;
         byte myByte = 0;
         for(boolean bit: bitArray){
@@ -152,11 +151,10 @@ public final class Bit {
      * @param bitArray bit array representation to convert
      * @return the array of bytes
      */
+    /*
     public static byte[] toBytes (boolean[] bitArray) {
-        // A CONTROLER
         assert bitArray!=null;
         assert bitArray.length != 0;
-        //assert bitArray.length==8;
         int processedBitCount = 0;
         int padding = bitArray.length % Byte.SIZE == 0 ? 0 : 1;
         int byteCount = bitArray.length / Byte.SIZE + padding;
@@ -181,6 +179,6 @@ public final class Bit {
         }
 
         return strBytes;
-    }
+    }*/
 
 }

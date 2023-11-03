@@ -47,7 +47,7 @@ public final class Text {
      * @return <b>UTF-8</b> representation of the string in the <b>bit array</b> format
      */
     public static boolean[] toBitArray(String str){
-        assert str!=null;
+        assert str != null;
         // first we convert our string to bytes
         byte[] strBytes = toBytes(str);
         // here, we will store our bits
@@ -82,9 +82,16 @@ public final class Text {
      * @return <b>UTF-8 String</b> representation of the bit array
      */
     public static String toString(boolean[] bitArray) {
-        assert bitArray  !=null;
-        byte[] strBytes = Bit.toBytes(bitArray);
-        return Text.toString(strBytes);
+        assert bitArray != null;
+        int charCount = bitArray.length / Byte.SIZE;
+        byte[] strBytes = new byte[charCount];
+        for (int i = 0; i < charCount; i++){
+            boolean[] charBytes = new boolean[Byte.SIZE];
+            System.arraycopy(bitArray, i * Byte.SIZE, charBytes, 0, Byte.SIZE);
+            byte charByte = Bit.toByte(charBytes);
+            strBytes[i] = charByte;
+        }
+        return toString(strBytes);
     }
 
 }
