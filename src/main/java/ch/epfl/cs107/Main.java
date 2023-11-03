@@ -374,7 +374,7 @@ public final class Main {
         System.out.println(Text.toString(Decrypt.xor(hint2, Text.toBytes("a")[0])));
         var image = Helper.readImage("challenge" + File.separator + "image.png");
         var key = Text.toBytes("adele");
-        TextSteganography.revealText(image);*/
+        TextSteganography.revealChallengeText(image);*/
     }
 
     private static boolean testImageSteganographyWithImages(String path){

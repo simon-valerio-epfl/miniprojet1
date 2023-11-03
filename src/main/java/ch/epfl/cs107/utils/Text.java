@@ -82,20 +82,10 @@ public final class Text {
      * @return <b>UTF-8 String</b> representation of the bit array
      */
     public static String toString(boolean[] bitArray) {
-        assert bitArray != null;
-        int charCount = bitArray.length / Byte.SIZE;
-        byte[] strBytes = new byte[charCount];
-        for (int i = 0; i < charCount; i++){
-            for (int j = 0; j < 8; j++) {
-                if (bitArray[i * 8 + j]) {
-                    strBytes[i] |= (byte) (1 << (7 - j));
-                }
-            }
-        }
-        return toString(strBytes);
+        return toString(toBytes(bitArray));
     }
 
-    public static byte[] toStringBytes(boolean[] bitArray) {
+    public static byte[] toBytes(boolean[] bitArray) {
         assert bitArray != null;
         int charCount = bitArray.length / Byte.SIZE;
         byte[] strBytes = new byte[charCount];
@@ -108,5 +98,6 @@ public final class Text {
         }
         return strBytes;
     }
+
 
 }
