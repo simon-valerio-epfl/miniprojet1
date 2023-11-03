@@ -11,6 +11,11 @@ import static ch.epfl.cs107.crypto.Encrypt.*;
 import static ch.epfl.cs107.crypto.Decrypt.*;
 import static ch.epfl.cs107.Main.*;
 
+
+//methods from/to Gray and from/to Binary should work with empty input image
+
+
+
 /**
  * <b>Task 1.3: </b>Utility class to manipulate ARGB images
  *
