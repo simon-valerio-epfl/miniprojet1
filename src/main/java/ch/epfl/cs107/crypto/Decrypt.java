@@ -2,6 +2,8 @@ package ch.epfl.cs107.crypto;
 
 import ch.epfl.cs107.Helper;
 
+import java.util.Arrays;
+
 import static ch.epfl.cs107.utils.Text.*;
 import static ch.epfl.cs107.utils.Image.*;
 import static ch.epfl.cs107.utils.Bit.*;
@@ -35,13 +37,8 @@ public final class Decrypt {
      * @return decoded message
      */
     public static byte[] caesar(byte[] cipher, byte key) {
-        assert cipher!=null;
-        byte[] plainText = new byte[cipher.length];
-        for (int i = 0; i < cipher.length; i++) {
-            plainText[i] = (byte) (cipher[i] - key);
-        }
-        return plainText;
-        //aussi Encrypt.caesar(plainText, -key);
+        assert (cipher != null);
+        return Encrypt.caesar(cipher, (byte) -key);
     }
 
     // ============================================================================================
@@ -58,11 +55,11 @@ public final class Decrypt {
         assert cipher!=null;
         assert keyword!=null;
         assert keyword.length!=0;
-        byte[] plainText = new byte[cipher.length];
-        for (int i = 0; i < cipher.length; i++) {
-            plainText[i] = (byte) (cipher[i] + keyword[i]);
+        byte[] reversedKeyword = new byte[keyword.length];
+        for (int i = 0; i < keyword.length; i++) {
+            reversedKeyword[i] = (byte) -keyword[i];
         }
-        return plainText;
+        return Encrypt.vigenere(cipher, reversedKeyword);
     }
 
     // ============================================================================================
@@ -75,10 +72,7 @@ public final class Decrypt {
      * @param iv the pad of size BLOCKSIZE we use to start the chain encoding
      * @return decoded message
      */
-    public static byte[] cbc(byte[] cipher, byte[] iv) {
-        assert (cipher!=null);
-        return cipher;
-    }
+    public static byte[] cbc(byte[] cipher, byte[] iv) { return Encrypt.cbc(cipher, iv); }
 
     // ============================================================================================
     // =================================== XOR'S ENCRYPTION =======================================

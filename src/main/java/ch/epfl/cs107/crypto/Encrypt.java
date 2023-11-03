@@ -2,6 +2,7 @@ package ch.epfl.cs107.crypto;
 
 import ch.epfl.cs107.Helper;
 
+import java.util.Arrays;
 import java.util.Random;
 
 import static ch.epfl.cs107.utils.Text.*;
@@ -65,7 +66,8 @@ public final class Encrypt {
         assert keyword.length!=0;
         byte[] vigenereText = new byte[plainText.length];
         for (int i = 0; i < plainText.length; i++) {
-            vigenereText[i] = (byte) (plainText[i] + keyword[i]);
+            byte keywordElement = keyword[(i % keyword.length)];
+            vigenereText[i] = (byte) (plainText[i] + keywordElement);
         }
         return vigenereText;
     }
@@ -82,19 +84,21 @@ public final class Encrypt {
      */
     public static byte[] cbc(byte[] plainText, byte[] iv) {
         assert (plainText!=null && iv!=null);
-        byte[] cbcText = new byte[plainText.length];
-        final int SIZE = iv.length;
-        int byteCounter;
-        int blockCounter =0;
-        do {
-            byteCounter = blockCounter*SIZE;
-            for (int i = 0; i < SIZE && (i < plainText.length-byteCounter); i++) {
-                cbcText[i + byteCounter] = (byte) (plainText[i + byteCounter] ^ iv[i]);
-                iv[i] = cbcText[i + byteCounter];
-            }
-            blockCounter++;
-        }while (byteCounter < plainText.length);
-        return cbcText;
+
+        final byte[] cipherText = new byte[plainText.length];
+
+        byte[] lastPad = iv;
+
+        for (int i = 0; i < plainText.length; i += iv.length) {
+            // we take the corresponding text
+            byte[] textPart = Arrays.copyOfRange(plainText, i, Math.min(plainText.length, i + iv.length));
+            // we encrypt it and save the result as the next pad
+            lastPad = oneTimePad(textPart, lastPad);
+            // then we add the ciphered text to the final res
+            System.arraycopy(lastPad, 0, cipherText, i, lastPad.length);
+        }
+
+        return cipherText;
     }
 
     // ============================================================================================
@@ -108,7 +112,7 @@ public final class Encrypt {
      * @return an encoded byte array
      */
     public static byte[] xor(byte[] plainText, byte key) {
-        assert  (plainText!=null);
+        assert (plainText!=null);
         byte[] xorText = new byte[plainText.length];
         for (int i = 0; i < plainText.length; i++) {
             xorText[i] = (byte) (plainText[i] ^ key);
@@ -136,7 +140,6 @@ public final class Encrypt {
             oneTimeText[i] = (byte) (plainText[i] ^ pad[i]);
         }
         return oneTimeText;
-
     }
 
     /**
@@ -147,11 +150,8 @@ public final class Encrypt {
      */
     public static void oneTimePad(byte[] plainText, byte[] pad, byte[] result) {
         assert (plainText!=null && pad.length >= plainText.length);
-        Random randomGenerator = new Random(2l);
-        randomGenerator.nextBytes(pad);
+        pad = Helper.generateRandomBytes(plainText.length);
         result = oneTimePad(plainText, pad);
-
-
     }
 
 }

@@ -49,7 +49,7 @@ public final class Main {
      * @implNote PLEASE UNCOMMENT EACH ASSERTION TO CHECK IF YOUR IMPLEMENTATION IS WORKING
      */
     public static void main(String[] args) {
-
+/*
         for (int i = 0; i < 8; i++) {
             System.out.println(Bit.toByte(Bit.toBitArray(Bit.toByte(new boolean[]{true, true, true, true, true, true, false, false}))));
         }
@@ -78,16 +78,16 @@ public final class Main {
         assert testImageFromBinary();
         Helper.dialog("Tests ", "Image manipulation passed");
         assert testWithRealImage("image-formats");
-        assert testBinaryWithRealImage("image-formats");/*
-        Helper.dialog("Tests ", "Image manipulation with images from 'image-formats' passed");
+        assert testBinaryWithRealImage("image-formats");
+        Helper.dialog("Tests ", "Image manipulation with images from 'image-formats' passed");*/
         // ========== Test Cryptography Methods ==========
         String message = "La vie est un long fleuve tranquille :-)";
         String key = "2cF%5";
-        //testCrypto(message, key);
-        //message = Text.toString(Helper.read("text_one.txt"));
-        //testCrypto(message, key);
+        testCrypto(message, key);
+        message = Text.toString(Helper.read("text_one.txt"));
+        testCrypto(message, key);
         Helper.dialog("Tests ", "Cryptography passed");
-        // ========== Test Steganography Methods ==========
+        /*// ========== Test Steganography Methods ==========
         //assert testEmbedBWImage();
         //assert testEmbedText();
         //assert testImageSteganographyWithImages("the-starry-night");
@@ -275,7 +275,7 @@ public final class Main {
         //Decoding with key
         byte[] decryptedAsBytes = Decrypt.vigenere(result, key);
         String decryptedAsString = Text.toString(decryptedAsBytes);
-        //System.out.println("Decoded : " + decryptedAsString); // uncomment to debug
+        System.out.println("Decoded : " + decryptedAsString); // uncomment to debug
         return Arrays.equals(string, decryptedAsBytes);
     }
 
