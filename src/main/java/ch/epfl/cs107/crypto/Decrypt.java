@@ -78,14 +78,7 @@ public final class Decrypt {
         assert iv !=null;
         assert iv.length != 0;
         final int PADSIZE = iv.length;
-        byte[] plainText = new byte[cipher.length];
-        for (int i = 0; i < PADSIZE; i++) {
-            plainText[i] = (byte) (cipher[i] ^ iv[i]);
-        }
-        for (int i = PADSIZE; i < cipher.length; i++) {
-            plainText[i] = (byte) (plainText[i- PADSIZE]^ cipher[i]);
-        }
-        return plainText;
+        return Encrypt.cbc(cipher, iv);
     }
 
     // ============================================================================================
