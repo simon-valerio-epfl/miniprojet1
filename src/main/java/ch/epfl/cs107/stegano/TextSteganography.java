@@ -106,6 +106,7 @@ public class TextSteganography {
     public static int[][] embedText(int[][] cover, byte[] message) {
         assert cover!=null;
         assert message!=null;
+        if (message.length == 0) return cover;
         for (int i = 0; i < cover.length; i++) {
             assert cover[i] != null;
             assert cover[i].length > 0;
