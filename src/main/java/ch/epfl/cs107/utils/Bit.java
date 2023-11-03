@@ -153,7 +153,7 @@ public final class Bit {
     public static byte[] toBytes (boolean[] bitArray) {
         // A CONTROLER
         assert bitArray!=null;
-        assert bitArray.length==8;
+        //assert bitArray.length==8;
         int processedBitCount = 0;
         int padding = bitArray.length % Byte.SIZE == 0 ? 0 : 1;
         int byteCount = bitArray.length / Byte.SIZE + padding;
