@@ -132,7 +132,6 @@ public final class Image {
      */
     public static int[][] toGray(int[][] image){
         assert image != null;
-
         for (int[] ints : image) {
             assert (ints != null);
         }
