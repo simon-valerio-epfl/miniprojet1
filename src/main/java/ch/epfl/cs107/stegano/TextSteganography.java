@@ -45,7 +45,7 @@ public class TextSteganography {
                 if (message.length > processedBool) {
                     newImage[x][y] = embedInLSB(pixelCover, message[processedBool]);
                 } else {
-                    newImage[x][y] = embedInLSB(pixelCover, false);
+                    newImage[x][y] = pixelCover;
                 }
             }
         }
