@@ -88,16 +88,15 @@ public final class Encrypt {
         assert iv !=null;
         assert iv.length != 0;
 
-        // encrypt first characters of plain text with iv
+        byte[] cipherText = new byte[plainText.length];
         for (int i = 0; i < iv.length; i++) {
-            plainText[i] ^= iv[i];
+            cipherText[i] = (byte) (plainText[i] ^ iv[i]);
         }
 
-        for (int i = iv.length; i < plainText.length; i++) {
-            plainText[i] ^= plainText[i-iv.length];
+        for (int i = iv.length ; i < plainText.length; i++) {
+            cipherText[i] = (byte) (cipherText[i-iv.length] ^ plainText[i]);
         }
-
-        return plainText;
+        return cipherText;
     }
 
     // ============================================================================================
