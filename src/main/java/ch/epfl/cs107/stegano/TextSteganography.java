@@ -70,7 +70,9 @@ public class TextSteganography {
      */
     public static boolean[] revealBitArray(int[][] image) {
         assert image != null;
-        assert image.length != 0;
+        if (image.length != 0) {
+            return new boolean[0];
+        }
         assert image[0] != null;
         assert image[0].length!=0;
         for (int i = 1; i < image.length; i++) {
