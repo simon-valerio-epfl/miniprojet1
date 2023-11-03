@@ -86,12 +86,27 @@ public final class Text {
         int charCount = bitArray.length / Byte.SIZE;
         byte[] strBytes = new byte[charCount];
         for (int i = 0; i < charCount; i++){
-            boolean[] charBytes = new boolean[Byte.SIZE];
-            System.arraycopy(bitArray, i * Byte.SIZE, charBytes, 0, Byte.SIZE);
-            byte charByte = Bit.toByte(charBytes);
-            strBytes[i] = charByte;
+            for (int j = 0; j < 8; j++) {
+                if (bitArray[i * 8 + j]) {
+                    strBytes[i] |= (byte) (1 << (7 - j));
+                }
+            }
         }
         return toString(strBytes);
+    }
+
+    public static byte[] toStringBytes(boolean[] bitArray) {
+        assert bitArray != null;
+        int charCount = bitArray.length / Byte.SIZE;
+        byte[] strBytes = new byte[charCount];
+        for (int i = 0; i < charCount; i++){
+            for (int j = 0; j < 8; j++) {
+                if (bitArray[i * 8 + j]) {
+                    strBytes[i] |= (byte) (1 << (7 - j));
+                }
+            }
+        }
+        return strBytes;
     }
 
 }

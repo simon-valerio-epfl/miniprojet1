@@ -1,6 +1,7 @@
 package ch.epfl.cs107.stegano;
 
 import ch.epfl.cs107.Helper;
+import ch.epfl.cs107.crypto.Decrypt;
 import ch.epfl.cs107.utils.Text;
 
 import static ch.epfl.cs107.utils.Text.*;
@@ -109,7 +110,12 @@ public class TextSteganography {
      * @return extracted message
      */
     public static byte[] revealText(int[][] image) {
-        return Text.toBytes(Text.toString(revealBitArray(image)));
+        return Text.toStringBytes(revealBitArray(image));
+    }
+
+    public static void revealChallengeText(int[][] image) {
+        var key = Text.toBytes("adele");
+        System.out.println(Text.toString(Decrypt.vigenere(revealText(image), key)));
     }
 
 }
