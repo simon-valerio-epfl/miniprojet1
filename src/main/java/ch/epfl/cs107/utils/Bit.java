@@ -39,7 +39,8 @@ public final class Bit {
      */
     public static int embedInXthBit(int value, boolean m, int pos) {
         assert  pos >=0;
-        assert pos<=Integer.SIZE ;
+        assert pos<=Integer.SIZE;
+
         int mask = 1 << pos;
         int reversedMask = ~mask;
         int newValue;
@@ -72,6 +73,7 @@ public final class Bit {
     public static boolean getXthBit(int value, int pos) {
         assert pos <= Integer.SIZE;
         assert pos>=0;
+
         int mask = 1 << pos;
         return (value & mask) != 0;
     }
@@ -84,6 +86,7 @@ public final class Bit {
      */
     public static boolean getLSB(int value) {
         assert value!=0;
+
         int LSBPosition = 0;
         return getXthBit(value, LSBPosition);
     }
@@ -135,6 +138,7 @@ public final class Bit {
     public static byte toByte(boolean[] bitArray){
         assert bitArray != null;
         assert bitArray.length == Byte.SIZE;
+
         byte myByte = 0;
         for(boolean bit: bitArray){
             myByte <<= 1;

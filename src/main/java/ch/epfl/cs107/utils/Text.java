@@ -88,6 +88,7 @@ public final class Text {
     public static byte[] toBytes(boolean[] bitArray) {
         assert bitArray != null;
         assert bitArray.length!=0;
+
         int charCount = bitArray.length / Byte.SIZE;
         byte[] strBytes = new byte[charCount];
         for (int i = 0; i < charCount; i++){
