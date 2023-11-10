@@ -38,8 +38,6 @@ public final class Decrypt {
      */
     public static byte[] caesar(byte[] cipher, byte key) {
         assert (cipher != null);
-        // todo demander à Fabrice si mettre deux fois les asserts pour plus de clarté
-        // todo mettre des final partout
         return Encrypt.caesar(cipher, (byte) -key);
     }
 

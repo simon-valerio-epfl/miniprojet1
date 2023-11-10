@@ -151,7 +151,6 @@ public final class Encrypt {
         assert pad.length >= plainText.length;
         pad = Helper.generateRandomBytes(plainText.length);
         oneTimePad(plainText, pad);
-        // todo demander à Fabrice
     }
 
 }
