@@ -38,8 +38,8 @@ public final class Decrypt {
      */
     public static byte[] caesar(byte[] cipher, byte key) {
         assert (cipher != null);
-        //TO DO demander à Fabrice si mettre deux fois les asserts pour plus de clarté
-
+        // todo demander à Fabrice si mettre deux fois les asserts pour plus de clarté
+        // todo mettre des final partout
         return Encrypt.caesar(cipher, (byte) -key);
     }
 
@@ -54,9 +54,10 @@ public final class Decrypt {
      * @return decoded message
      */
     public static byte[] vigenere(byte[] cipher, byte[] keyword) {
-        assert cipher!=null;
-        assert keyword!=null;
-        assert keyword.length!=0;
+        assert cipher != null;
+        assert keyword != null;
+        assert keyword.length != 0;
+
         byte[] reversedKeyword = new byte[keyword.length];
         for (int i = 0; i < keyword.length; i++) {
             reversedKeyword[i] = (byte) -keyword[i];
@@ -76,10 +77,8 @@ public final class Decrypt {
      */
     public static byte[] cbc(byte[] cipher, byte[] iv) {
         assert cipher != null;
-        if (cipher.length == 0) {
-            return cipher;
-        }
-        assert iv !=null;
+        if (cipher.length == 0) return cipher;
+        assert iv != null;
         assert iv.length != 0;
         final int PADSIZE = iv.length;
 

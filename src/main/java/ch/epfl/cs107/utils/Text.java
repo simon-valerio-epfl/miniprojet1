@@ -1,18 +1,5 @@
 package ch.epfl.cs107.utils;
-
-import ch.epfl.cs107.Helper;
-
 import java.nio.charset.StandardCharsets;
-
-import static ch.epfl.cs107.utils.Text.*;
-import static ch.epfl.cs107.utils.Image.*;
-import static ch.epfl.cs107.utils.Bit.*;
-import static ch.epfl.cs107.stegano.ImageSteganography.*;
-import static ch.epfl.cs107.stegano.TextSteganography.*;
-import static ch.epfl.cs107.crypto.Encrypt.*;
-import static ch.epfl.cs107.crypto.Decrypt.*;
-import static ch.epfl.cs107.Main.*;
-
 
 /**
  * <b>Task 1.2: </b>Utility class to manipulate texts ({@link String}) objects.
@@ -71,7 +58,6 @@ public final class Text {
      * @return String representation using the {@link String} type
      */
     public static String toString(byte[] bytes) {
-        assert bytes!=null;
         return new String(bytes, StandardCharsets.UTF_8);
     }
 
@@ -84,9 +70,14 @@ public final class Text {
         return toString(toBytes(bitArray));
     }
 
+    /**
+     * Converts a given bit array
+     * @param bitArray
+     * @return
+     */
     public static byte[] toBytes(boolean[] bitArray) {
         assert bitArray != null;
-        assert bitArray.length!=0;
+        assert bitArray.length != 0;
 
         int charCount = bitArray.length / Byte.SIZE;
         byte[] strBytes = new byte[charCount];
@@ -97,6 +88,7 @@ public final class Text {
                 }
             }
         }
+
         return strBytes;
     }
 

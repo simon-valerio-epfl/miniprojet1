@@ -32,10 +32,6 @@ public final class Image {
     // ==================================== PIXEL MANIPULATION ====================================
     // ============================================================================================
 
-    public static int signedToUnsignedInt(int signed) {
-        return signed & 255;
-    }
-
     /**
      * Build a given pixel value from its respective components
      *
@@ -49,7 +45,7 @@ public final class Image {
         int pixel = 0;
         byte[] components = {blue, green, red, alpha};
         for (int i = 0; i < components.length; i++) {
-            int componentValue = signedToUnsignedInt(components[i]) << i*Byte.SIZE;
+            int componentValue = Byte.toUnsignedInt(components[i]) << i*Byte.SIZE;
             pixel |= componentValue;
         }
         return pixel;
@@ -102,9 +98,9 @@ public final class Image {
      * @return gray scaling of the given pixel
      */
     public static int gray(int pixel){
-        int red = signedToUnsignedInt(red(pixel));
-        int green = signedToUnsignedInt(green(pixel));
-        int blue = signedToUnsignedInt(blue(pixel));
+        int red = Byte.toUnsignedInt(red(pixel));
+        int green = Byte.toUnsignedInt(green(pixel));
+        int blue = Byte.toUnsignedInt(blue(pixel));
         return (red + green + blue) / 3;
     }
 
@@ -142,7 +138,6 @@ public final class Image {
         // handle empty image
         if (image.length == 0) return new int[0][0];
 
-
         int[][] newImage = new int[image.length][image[0].length];
 
         for (int x = 0; x < image.length; x++) {
@@ -169,7 +164,6 @@ public final class Image {
 
         // handle empty image
         if (image.length == 0) return new boolean[0][0];
-
 
         boolean[][] newImage = new boolean[image.length][image[0].length];
 

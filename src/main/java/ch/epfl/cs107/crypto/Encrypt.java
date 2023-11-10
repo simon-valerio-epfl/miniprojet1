@@ -39,7 +39,7 @@ public final class Encrypt {
      * @return an encoded byte array
      */
     public static byte[] caesar(byte[] plainText, byte key) {
-        assert plainText!=null;
+        assert plainText != null;
         byte[] caesarText = new byte[plainText.length];
         for (int i = 0; i < plainText.length; i++) {
             caesarText[i] = (byte) (plainText[i] + key);
@@ -61,9 +61,9 @@ public final class Encrypt {
      * @return an encoded byte array
      */
     public static byte[] vigenere(byte[] plainText, byte[] keyword) {
-        assert plainText!=null;
-        assert keyword!=null;
-        assert keyword.length!=0;
+        assert plainText != null;
+        assert keyword != null;
+        assert keyword.length != 0;
         byte[] vigenereText = new byte[plainText.length];
         for (int i = 0; i < plainText.length; i++) {
             byte keywordElement = keyword[(i % keyword.length)];
@@ -84,10 +84,8 @@ public final class Encrypt {
      */
     public static byte[] cbc(byte[] plainText, byte[] iv) {
         assert plainText != null;
-        if (plainText.length == 0) {
-            return plainText;
-        }
-        assert iv !=null;
+        if (plainText.length == 0) return plainText;
+        assert iv != null;
         assert iv.length != 0;
 
         byte[] cipherText = new byte[plainText.length];
@@ -112,7 +110,7 @@ public final class Encrypt {
      * @return an encoded byte array
      */
     public static byte[] xor(byte[] plainText, byte key) {
-        assert (plainText!=null);
+        assert plainText != null;
         byte[] xorText = new byte[plainText.length];
         for (int i = 0; i < plainText.length; i++) {
             xorText[i] = (byte) (plainText[i] ^ key);
@@ -132,9 +130,9 @@ public final class Encrypt {
      * @return an encoded byte array
      */
     public static byte[] oneTimePad(byte[] plainText, byte[] pad) {
-        assert plainText!= null;
-        assert pad!=null;
-        assert pad.length==plainText.length;
+        assert plainText != null;
+        assert pad != null;
+        assert pad.length == plainText.length;
         byte[] oneTimeText = new byte[plainText.length];
         for (int i = 0; i < plainText.length; i++) {
             oneTimeText[i] = (byte) (plainText[i] ^ pad[i]);
@@ -149,10 +147,11 @@ public final class Encrypt {
      * @param result Array containing the result after the execution
      */
     public static void oneTimePad(byte[] plainText, byte[] pad, byte[] result) {
-        assert plainText!=null;
+        assert plainText != null;
         assert pad.length >= plainText.length;
         pad = Helper.generateRandomBytes(plainText.length);
-        result = oneTimePad(plainText, pad);
+        oneTimePad(plainText, pad);
+        // todo demander à Fabrice
     }
 
 }

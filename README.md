@@ -47,3 +47,7 @@ Ces fonctions prennent en paramètre :
 
 Nous avons ajouté ici une fonction `getExpectedString` (String, String[] -> String) qui prend en entrée une chaîne de caractère **proposée** par l'utilisateur, et une liste de chaînes de caractères **attendues**.  
 Cette fonction renvoie la première chaine de caractères **attendue** qui est égale, en utilisant une comparaison non sensible à la casse, à la chaîne proposée par l'utilisateur.
+
+### Package Text
+
+text.toBytes

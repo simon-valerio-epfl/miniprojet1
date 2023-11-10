@@ -37,12 +37,13 @@ public class TextSteganography {
      * @return ARGB image with the message embedded
      */
     public static int[][] embedBitArray(int[][] cover, boolean[] message) {
-        assert cover!=null;
-        assert message!=null;
-        assert cover.length!=0;
-        assert cover[0] !=null;
+        assert cover != null;
+        assert message != null;
+        if (message.length == 0) return cover; // opti
+        assert cover.length != 0;
+        assert cover[0] != null;
         assert cover[0].length != 0;
-        for(int[] row : cover){
+        for(int[] row: cover){
             assert row != null;
             assert row.length == cover[0].length;
         }
@@ -71,11 +72,9 @@ public class TextSteganography {
      */
     public static boolean[] revealBitArray(int[][] image) {
         assert image != null;
-        if (image.length == 0) {
-            return new boolean[0];
-        }
+        if (image.length == 0) return new boolean[0];
         assert image[0] != null;
-        assert image[0].length!=0;
+        assert image[0].length != 0;
         for (int i = 1; i < image.length; i++) {
             assert image[i] != null;
             assert image[i].length == image[0].length;
@@ -108,8 +107,8 @@ public class TextSteganography {
      * @return ARGB image with the message embedded
      */
     public static int[][] embedText(int[][] cover, byte[] message) {
-        assert cover!=null;
-        assert message!=null;
+        assert cover != null;
+        assert message != null;
         if (message.length == 0) return cover;
         for (int i = 0; i < cover.length; i++) {
             assert cover[i] != null;
@@ -132,8 +131,7 @@ public class TextSteganography {
      * @return extracted message
      */
     public static byte[] revealText(int[][] image) {
-        return Text.toBytes(
-                revealBitArray(image));
+        return Text.toBytes(revealBitArray(image));
     }
 
 }

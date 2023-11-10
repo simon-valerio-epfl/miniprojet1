@@ -27,8 +27,6 @@ public final class Bit {
     // ==================================== BIT MANIPULATION ======================================
     // ============================================================================================
 
-    public static final int MAX_VALUE_FOR_BYTE = 255;
-
     /**
      * Embed a bit in a given integer bits
      * <p>
@@ -38,17 +36,11 @@ public final class Bit {
      * @return embedded value
      */
     public static int embedInXthBit(int value, boolean m, int pos) {
-        assert  pos >=0;
-        assert pos<=Integer.SIZE;
+        assert  pos >= 0;
+        assert pos <= Integer.SIZE;
 
-        int mask = 1 << pos;
-        int reversedMask = ~mask;
-        int newValue;
-        // if we want to replace our actual bit by a 1
-        if (m) newValue = value | mask;
-        // or 0
-        else newValue = value & reversedMask;
-        return newValue;
+        if (getXthBit(value, pos) == m) return value;
+        return value ^ (1 << pos);
     }
 
     /**
@@ -72,8 +64,7 @@ public final class Bit {
      */
     public static boolean getXthBit(int value, int pos) {
         assert pos <= Integer.SIZE;
-        assert pos>=0;
-
+        assert pos >= 0;
         int mask = 1 << pos;
         return (value & mask) != 0;
     }
@@ -85,10 +76,8 @@ public final class Bit {
      * @return <code>true</code> if the bit is '1' and <code>false</code> otherwise
      */
     public static boolean getLSB(int value) {
-        assert value!=0;
-
-        int LSBPosition = 0;
-        return getXthBit(value, LSBPosition);
+        assert value != 0;
+        return getXthBit(value, 0);
     }
 
     // ============================================================================================
@@ -142,9 +131,7 @@ public final class Bit {
         byte myByte = 0;
         for(boolean bit: bitArray){
             myByte <<= 1;
-            if (bit) {
-                myByte += 1;
-            }
+            if (bit) myByte += 1;
         }
         return myByte;
     }

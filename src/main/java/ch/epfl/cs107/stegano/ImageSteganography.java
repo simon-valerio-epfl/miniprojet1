@@ -36,7 +36,7 @@ public final class ImageSteganography {
      * @return ARGB image with the image embedded on the cover
      */
     public static int[][] embedARGB(int[][] cover, int[][] argbImage, int threshold){
-        int[][] grayImage = toGray(argbImage);
+        int[][] grayImage = toGray(argbImage); // todo: final ?
         return embedGray(cover, grayImage, threshold);
     }
 
@@ -48,10 +48,10 @@ public final class ImageSteganography {
      * @return ARGB image with the image embedded on the cover
      */
     public static int[][] embedGray(int[][] cover, int[][] grayImage, int threshold){
-        assert grayImage !=null;
-        assert cover!= null;
-        assert cover.length!=0;
-        assert grayImage.length!=0;
+        assert grayImage != null;
+        assert cover != null;
+        assert cover.length != 0;
+        assert grayImage.length != 0;
 
         boolean[][] binaryImage = toBinary(grayImage, threshold);
         return embedBW(cover, binaryImage);
