@@ -71,9 +71,9 @@ public final class Text {
     }
 
     /**
-     * Converts a given bit array
+     * Converts a given bit array (represented with booleans) to an array of actual bytes
      * @param bitArray
-     * @return
+     * @return the array of bytes
      */
     public static byte[] toBytes(boolean[] bitArray) {
         assert bitArray != null;

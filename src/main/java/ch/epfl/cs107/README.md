@@ -6,7 +6,7 @@
 
 Après avoir fini le projet nous avons codé dans le fichier `Main.java` un algorithme pour pouvoir facilement cacher du texte dans des images sur notre ordinateur.
 
-![example](./example.png)
+![example](../../../../../../example.png)
 
 #### ⚙️ Paramètres ⚙️
 
