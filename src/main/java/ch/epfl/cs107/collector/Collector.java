@@ -146,27 +146,6 @@ public class Collector {
     }
 
     /**
-     * Asks for a file path value, and deals with the user until a valid answer is provided.
-     * @param question The question to ask the user
-     * @param validator The function that validates the user's input and checks if it's a valid absolute or relative path
-     * @param modifier The function that converts the user's input to the final absolute path
-     * @return String
-     */
-    public static String collectSafeFilePath (String question, StringValidatorFunction validator, StringModifierFunction modifier) {
-        System.out.println(question);
-
-        while (true) {
-            String providedValue = scanner.nextLine();
-            if (validator.apply(providedValue)) {
-                return modifier.apply(providedValue);
-            } else {
-                System.out.println("Sorry, plz provide a valid path.");
-                System.out.println(question);
-            }
-        }
-    }
-
-    /**
      * Asks for a boolean value, and deals with the user until a valid answer is provided.
      * @param question The question to ask the user
      * @param validator The function that validates the user's input (can be yes/no, ok/abort, etc.)

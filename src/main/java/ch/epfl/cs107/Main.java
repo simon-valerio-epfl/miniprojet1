@@ -58,7 +58,7 @@ public final class Main {
             final String conversionType = Collector.collectSafeString("Do you want to hide or reveal? (hide/reveal)", Collector::VALIDATOR_STEGANO_METHOD, Collector::MODIFIER_STEGANO_METHOD);
 
             if (conversionType.equals("hide")) {
-                final String path = Collector.collectSafeFilePath("Please provide a cover image path:", Collector::VALIDATOR_EXISTING_FILE_PATH_STRING, Collector::MODIFIER_FILE_PATH_STRING);
+                final String path = Collector.collectSafeString("Please provide a cover image path:", Collector::VALIDATOR_EXISTING_FILE_PATH_STRING, Collector::MODIFIER_FILE_PATH_STRING);
                 String message = Collector.collectSafeString("Please provide a message to hide:", Collector::VALIDATOR_NOT_EMPTY_STRING, Collector::MODIFIER_PLACEHOLDER);
                 final boolean encrypt = Collector.collectSafeBoolean("Do you want to encrypt your message?", Collector::VALIDATOR_YES_NO, Collector::MODIFIER_YES_NO);
 
@@ -79,11 +79,11 @@ public final class Main {
                 var image = Helper.readImage(path);
                 var newImage = TextSteganography.embedText(image, toEncode);
 
-                final String outputPath = Collector.collectSafeFilePath("Please provide an output image path:", Collector::VALIDATOR_FILE_PATH_STRING, Collector::MODIFIER_FILE_PATH_STRING);
+                final String outputPath = Collector.collectSafeString("Please provide an output image path:", Collector::VALIDATOR_FILE_PATH_STRING, Collector::MODIFIER_FILE_PATH_STRING);
 
                 Helper.writeImage(outputPath, newImage);
             } else if (conversionType.equals("reveal")) {
-                final String path = Collector.collectSafeFilePath("Please provide a hidden image path:", Collector::VALIDATOR_EXISTING_FILE_PATH_STRING, Collector::MODIFIER_FILE_PATH_STRING);
+                final String path = Collector.collectSafeString("Please provide a hidden image path:", Collector::VALIDATOR_EXISTING_FILE_PATH_STRING, Collector::MODIFIER_FILE_PATH_STRING);
                 final boolean encrypted = Collector.collectSafeBoolean("Is the message encrypted?", Collector::VALIDATOR_YES_NO, Collector::MODIFIER_YES_NO);
 
                 byte[] plainText = {};
