@@ -1,5 +1,6 @@
 package ch.epfl.cs107;
 
+import ch.epfl.cs107.collector.Collector;
 import ch.epfl.cs107.crypto.Decrypt;
 import ch.epfl.cs107.crypto.Encrypt;
 import ch.epfl.cs107.stegano.ImageSteganography;
@@ -49,50 +50,69 @@ public final class Main {
      * @implNote PLEASE UNCOMMENT EACH ASSERTION TO CHECK IF YOUR IMPLEMENTATION IS WORKING
      */
     public static void main(String[] args) {
-/*
-        for (int i = 0; i < 8; i++) {
-            System.out.println(Bit.toByte(Bit.toBitArray(Bit.toByte(new boolean[]{true, true, true, true, true, true, false, false}))));
-        }
-        int[][] cicic = {{1,2}, {1,4}};
-        Image.toGray(cicic);
 
-        System.out.println(Text.toString(Text.toBitArray("ci e coucou barilla")));
+        System.out.println("Hey there! Welcome to our awesome tool to hide messages in your image.");
 
-        // ========== Test Bit ==========
-        assert testXthBit();
-        assert testGetLSB();
-        assert testEmbedInXthBit();
-        assert testEmbedInLSB();
-        assert testByteConversion();
-        // ========== Test Text ==========
-        assert testToBitArray();
-        Helper.dialog("Tests", "Bit and Text manipulation passed");
+        do {
 
-        // ========== Test Image ==========
-        assert testConversionARGBInt();
-        assert testPixelToGray();
-        assert testGrayToBinary();
-        assert testImageToGray();
-        assert testGrayImageToBinary();
-        assert testImageFromGray();
-        assert testImageFromBinary();
-        Helper.dialog("Tests ", "Image manipulation passed");
-        assert testWithRealImage("image-formats");
-        assert testBinaryWithRealImage("image-formats");
-        Helper.dialog("Tests ", "Image manipulation with images from 'image-formats' passed");*/
-        // ========== Test Cryptography Methods ==========
-        String message = "La vie est un long fleuve tranquille :-)";
-        String key = "2cF%5";
-        testCrypto(message, key);
-        message = Text.toString(Helper.read("text_one.txt"));
-        testCrypto(message, key);
-        Helper.dialog("Tests ", "Cryptography passed");
-        // ========== Test Steganography Methods ==========
-        testTextSteg();
-        assert testEmbedBWImage();
-        assert testEmbedText();
-        assert testImageSteganographyWithImages("the-starry-night");
-        Helper.dialog("Tests ", "ImageSteganography passed");
+            final String conversionType = Collector.collectSafeString("Do you want to hide or reveal? (hide/reveal)", Collector::VALIDATOR_STEGANO_METHOD, Collector::MODIFIER_STEGANO_METHOD);
+
+            if (conversionType.equals("hide")) {
+                final String path = Collector.collectSafeFilePath("Please provide a cover image path:", Collector::VALIDATOR_EXISTING_FILE_PATH_STRING, Collector::MODIFIER_FILE_PATH_STRING);
+                String message = Collector.collectSafeString("Please provide a message to hide:", Collector::VALIDATOR_NOT_EMPTY_STRING, Collector::MODIFIER_PLACEHOLDER);
+                final boolean encrypt = Collector.collectSafeBoolean("Do you want to encrypt your message?", Collector::VALIDATOR_YES_NO, Collector::MODIFIER_YES_NO);
+
+                byte[] toEncode = {};
+
+                if (encrypt) {
+                    final String method = Collector.collectSafeString("Please provide the right encrypt method (cbc or vigenere).", Collector::VALIDATOR_CRYPTO_METHOD, Collector::MODIFIER_CRYPTO_METHOD);
+                    final byte[] key = Text.toBytes(Collector.collectSafeString("Please provide a key for the encryption.", Collector::VALIDATOR_NOT_EMPTY_STRING, Collector::MODIFIER_PLACEHOLDER));
+                    final byte[] plainText = Text.toBytes(message);
+                    switch (method) {
+                        case "cbc" -> toEncode = Encrypt.cbc(plainText, key);
+                        case "vigenere" -> toEncode = Encrypt.vigenere(plainText, key);
+                    }
+                } else {
+                    toEncode = Text.toBytes(message);
+                }
+
+                var image = Helper.readImage(path);
+                var newImage = TextSteganography.embedText(image, toEncode);
+
+                final String outputPath = Collector.collectSafeFilePath("Please provide an output image path:", Collector::VALIDATOR_FILE_PATH_STRING, Collector::MODIFIER_FILE_PATH_STRING);
+
+                Helper.writeImage(outputPath, newImage);
+            } else if (conversionType.equals("reveal")) {
+                final String path = Collector.collectSafeFilePath("Please provide a hidden image path:", Collector::VALIDATOR_EXISTING_FILE_PATH_STRING, Collector::MODIFIER_FILE_PATH_STRING);
+                final boolean encrypted = Collector.collectSafeBoolean("Is the message encrypted?", Collector::VALIDATOR_YES_NO, Collector::MODIFIER_YES_NO);
+
+                byte[] plainText = {};
+
+                var image = Helper.readImage(path);
+                byte[] cipherOrPlainText = TextSteganography.revealText(image);
+
+                if (encrypted) {
+                    final String method = Collector.collectSafeString("Please provide the right encrypt method (cbc or vigenere).", Collector::VALIDATOR_CRYPTO_METHOD, Collector::MODIFIER_CRYPTO_METHOD);
+                    final byte[] key = Text.toBytes(Collector.collectSafeString("Please provide a key for the encryption.", Collector::VALIDATOR_NOT_EMPTY_STRING, Collector::MODIFIER_PLACEHOLDER));
+                    switch (method) {
+                        case "cbc" -> plainText = Decrypt.cbc(cipherOrPlainText, key);
+                        case "vigenere" -> plainText = Encrypt.vigenere(cipherOrPlainText, key);
+                    }
+                } else {
+                    plainText = cipherOrPlainText;
+                }
+
+                System.out.println("Your message is");
+                System.out.println(Text.toString(plainText));
+            }
+
+            System.out.println("Operation is successful! Congrats!");
+
+        } while (
+                Collector.collectSafeBoolean("Do you want to make a new conversion? y/n", Collector::VALIDATOR_YES_NO, Collector::MODIFIER_YES_NO)
+        );
+
+        System.out.println("k, bye.");
 
         resolveChallenge();
     }

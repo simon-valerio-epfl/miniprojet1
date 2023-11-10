@@ -69,6 +69,24 @@ public final class Helper {
     }
 
     // ============================================================================================
+    // ============================= INPUT VALIDATION METHODS =====================================
+    // ============================================================================================
+
+    /**
+     * Returns the first matching string in the expected strings array
+     * Important note: case is not checked!
+     * @param x the string to match
+     * @param expectedStrings the list of strings to expect
+     * @return boolean (or "unknown" if nothing is found)
+     */
+    public static String getExpectedString (String x, String[] expectedStrings) {
+        for (String val : expectedStrings) {
+            if (x.equalsIgnoreCase(val)) return val;
+        }
+        return "unknown";
+    }
+
+    // ============================================================================================
     // ============================= BINARY FILE MANIPULATION METHODS =============================
     // ============================================================================================
 
