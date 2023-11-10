@@ -64,15 +64,15 @@ public final class ImageSteganography {
      * @return ARGB image with the image embedded on the cover
      */
     public static int[][] embedBW(int[][] cover, boolean[][] load){
-        assert cover!=null;
-        assert load!=null;
-        assert load.length!=0;
+        assert cover != null;
+        assert load != null;
+        assert load.length != 0;
         assert cover.length >= load.length;
         for (int i = 0; i < load.length; i++) {
-            assert load[i] !=null;
+            assert load[i] != null;
             assert cover[i] != null;
             assert load[i].length != 0;
-            assert cover[i].length >=load[i].length;
+            assert cover[i].length >= load[i].length;
         }
 
         int[][] newImage = new int[cover.length][cover[0].length];
@@ -103,15 +103,14 @@ public final class ImageSteganography {
      * @return binary representation of the hidden image
      */
     public static boolean[][] revealBW(int[][] image) {
-
         assert image != null;
         assert image.length != 0;
-        for (int[] ints : image) {
+        for (int[] ints: image) {
             assert ints != null;
             assert ints.length == image[0].length;
         }
 
-        boolean[][] revealedImage = new boolean [image.length][image[0].length];
+        boolean[][] revealedImage = new boolean[image.length][image[0].length];
         for (int x = 0; x < image.length; x++) {
             for (int y = 0; y < image[0].length; y++) {
                 revealedImage[x][y] = Bit.getLSB(image[x][y]);
