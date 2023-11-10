@@ -105,9 +105,9 @@ public final class ImageSteganography {
 
         assert image != null;
         assert image.length != 0;
-        for (int i = 0; i < image.length; i++) {
-            assert image[i] != null;
-            assert image[i].length == image[0].length;
+        for (int[] ints : image) {
+            assert ints != null;
+            assert ints.length == image[0].length;
         }
 
         boolean[][] revealedImage = new boolean [image.length][image[0].length];
