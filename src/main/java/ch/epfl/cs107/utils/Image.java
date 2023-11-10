@@ -210,7 +210,7 @@ public final class Image {
      * @return <b>black and white ARGB</b> representation
      */
     public static int[][] fromBinary(boolean[][] image){
-        assert image !=null;
+        assert image != null;
         for (boolean[] bools : image) {
             assert (bools != null);
         }
