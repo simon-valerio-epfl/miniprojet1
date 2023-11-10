@@ -116,7 +116,10 @@ public final class Image {
      * @return binary representation of a pixel
      */
     public static boolean binary(int gray, int threshold){
-        assert gray >= 0 && gray <= 255;
+        //we assert that the gray value is in a reasonable range
+        assert gray >= 0;
+        assert gray <= 255;
+
         return gray >= threshold;
     }
 
@@ -138,6 +141,7 @@ public final class Image {
 
         // handle empty image
         if (image.length == 0) return new int[0][0];
+
 
         int[][] newImage = new int[image.length][image[0].length];
 
@@ -165,6 +169,8 @@ public final class Image {
 
         // handle empty image
         if (image.length == 0) return new boolean[0][0];
+
+
         boolean[][] newImage = new boolean[image.length][image[0].length];
 
         for (int x = 0; x < image.length; x++) {
@@ -232,12 +238,14 @@ public final class Image {
     }
 
     public static byte extractPrimaryComponent(int pixel, int componentPos){
-        assert (componentPos <= 3 && componentPos >= 0);
+        //we assert that the component has a reasonable position
+        assert componentPos <= 3;
+        assert componentPos >= 0;
+
         int mask = 255;
         int shift = Byte.SIZE * componentPos;
         pixel >>= shift;
         pixel &= mask;
         return (byte) pixel;
     }
-
 }

@@ -80,6 +80,7 @@ public class TextSteganography {
             assert image[i] != null;
             assert image[i].length == image[0].length;
         }
+
         boolean[] revealedText = new boolean[image.length * image[0].length];
 
         for (int x = 0; x < image.length; x++) {
@@ -115,7 +116,9 @@ public class TextSteganography {
             assert cover[i].length > 0;
             assert cover[i].length == cover[0].length;
         }
+
         boolean[] messageBool = new boolean[Byte.SIZE * message.length];
+
         for (int i = 0; i < message.length; i++) {
             boolean[] byteBool = Bit.toBitArray(message[i]);
             System.arraycopy(byteBool, 0, messageBool, i*Byte.SIZE, byteBool.length);
@@ -131,11 +134,6 @@ public class TextSteganography {
     public static byte[] revealText(int[][] image) {
         return Text.toBytes(
                 revealBitArray(image));
-    }
-
-    public static void revealChallengeText(int[][] image) {
-        var key = Text.toBytes("adele");
-        System.out.println(Text.toString(Decrypt.vigenere(revealText(image), key)));
     }
 
 }

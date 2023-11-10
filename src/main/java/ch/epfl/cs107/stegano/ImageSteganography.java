@@ -52,6 +52,7 @@ public final class ImageSteganography {
         assert cover!= null;
         assert cover.length!=0;
         assert grayImage.length!=0;
+
         boolean[][] binaryImage = toBinary(grayImage, threshold);
         return embedBW(cover, binaryImage);
     }

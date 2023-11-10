@@ -149,7 +149,8 @@ public final class Encrypt {
      * @param result Array containing the result after the execution
      */
     public static void oneTimePad(byte[] plainText, byte[] pad, byte[] result) {
-        assert (plainText!=null && pad.length >= plainText.length);
+        assert plainText!=null;
+        assert pad.length >= plainText.length;
         pad = Helper.generateRandomBytes(plainText.length);
         result = oneTimePad(plainText, pad);
     }
