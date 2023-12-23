@@ -93,7 +93,7 @@ public final class Encrypt {
             cipherText[i] = (byte) (plainText[i] ^ iv[i]);
         }
 
-        for (int i = iv.length ; i < plainText.length; i++) {
+        for (int i = iv.length; i < plainText.length; i++) {
             cipherText[i] = (byte) (cipherText[i-iv.length] ^ plainText[i]);
         }
         return cipherText;
